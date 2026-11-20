@@ -149,13 +149,16 @@ function MembersTab() {
   const members = useTable<Member>("members", "member_number");
   const [q, setQ] = useState("");
   const [country, setCountry] = useState("");
+  const [sort, setSort] = useState<"number" | "name" | "country">("number");
   const [open, setOpen] = useState<Member | null>(null);
   const [adding, setAdding] = useState(false);
   if (open) return <MemberSheet member={open} back={() => { setOpen(null); members.refetch(); }} />;
   const list = (members.data ?? [])
     .filter((m) => !country || m.country === country)
     .filter((m) => `${m.first_name} ${m.last_name} ${m.email ?? ""}`.toLowerCase().includes(q.toLowerCase()))
-    .sort((a, b) => a.last_name.localeCompare(b.last_name));
+    .sort((a, b) => sort === "number" ? a.member_number - b.member_number
+      : sort === "name" ? a.last_name.localeCompare(b.last_name) || a.first_name.localeCompare(b.first_name)
+      : a.country.localeCompare(b.country) || a.member_number - b.member_number);
   const statusLabel: Record<string, string> = { pending: "En attente", validated: "Validé", refused: "Refusé", founder: "Fondateur · à compléter" };
   return (
     <>
@@ -164,6 +167,9 @@ function MembersTab() {
         <input placeholder="Rechercher un nom ou un email" value={q} onChange={(e) => setQ(e.target.value)} className={`${inputClass} max-w-xs`} />
         <select value={country} onChange={(e) => setCountry(e.target.value)} className={`${inputClass} max-w-[180px]`}>
           <option value="">Tous les pays</option><option value="FR">France</option><option value="CD">Congo</option>
+        </select>
+        <select value={sort} onChange={(e) => setSort(e.target.value as "number" | "name" | "country")} className={`${inputClass} max-w-[220px]`} aria-label="Trier">
+          <option value="number">Trier par numéro</option><option value="name">Trier par nom (A → Z)</option><option value="country">Trier par pays</option>
         </select>
         <Button variant="outline" onClick={() => setAdding((v) => !v)}>Ajouter une fiche</Button>
       </div>
@@ -218,6 +224,7 @@ function MemberSheet({ member: initial, back }: { member: Member; back: () => vo
   const pays = useQuery({ queryKey: ["admin-pays", member.id], queryFn: async () => ((await supabase.from("payments").select("*").eq("member_id", member.id).order("paid_at", { ascending: false })).data ?? []) as Payment[] });
   const [busy, setBusy] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [err, setErr] = useState("");
   const save = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
@@ -225,8 +232,11 @@ function MemberSheet({ member: initial, back }: { member: Member; back: () => vo
       first_name: String(f.get("first_name")).trim(), last_name: String(f.get("last_name")).trim(),
       email: String(f.get("email")).trim().toLowerCase() || null, phone: String(f.get("phone")).trim(), city: String(f.get("city")).trim(),
       country: String(f.get("country")), category: String(f.get("category")), status: String(f.get("status")),
+      member_number: Number(f.get("member_number")) || member.member_number,
     };
-    const { data } = await supabase.from("members").update(patch).eq("id", member.id).select().single();
+    const { data, error } = await supabase.from("members").update(patch).eq("id", member.id).select().single();
+    if (error) { setErr(error.code === "23505" ? "Ce numéro (ou cet email) est déjà utilisé par un autre membre. Libérez-le d'abord." : "Enregistrement impossible."); return; }
+    setErr("");
     if (data) { setMember(data as Member); setSaved(true); setTimeout(() => setSaved(false), 2500); }
   };
   const upload = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -256,6 +266,7 @@ function MemberSheet({ member: initial, back }: { member: Member; back: () => vo
         <div className="space-y-6">
           <MemberCard member={member} />
           <form onSubmit={save} className="grid gap-3 rounded-xl border p-4 sm:grid-cols-2">
+            <Field label="Numéro de membre"><input name="member_number" type="number" min={1} defaultValue={member.member_number} className={inputClass} /></Field>
             <Field label="Prénom"><input name="first_name" defaultValue={member.first_name} className={inputClass} /></Field>
             <Field label="Nom"><input name="last_name" defaultValue={member.last_name} className={inputClass} /></Field>
             <Field label="Email"><input name="email" type="email" defaultValue={member.email ?? ""} className={inputClass} /></Field>
@@ -265,6 +276,7 @@ function MemberSheet({ member: initial, back }: { member: Member; back: () => vo
             <Field label="Catégorie"><select name="category" defaultValue={member.category} className={inputClass}><option value="effectif">Effectif</option><option value="sympathisant">Sympathisant</option></select></Field>
             <Field label="Statut"><select name="status" defaultValue={member.status} className={inputClass}><option value="pending">En attente</option><option value="validated">Validé</option><option value="refused">Refusé</option><option value="founder">Fondateur · à compléter</option></select></Field>
             <p className="text-xs text-muted-foreground sm:col-span-2">Compte relié : {member.user_id ? "oui" : "non"} · Consentement documents : {member.documents_consent_at ? `oui, le ${fmt(member.documents_consent_at)}` : "pas encore"}</p>
+            {err && <p role="alert" className="text-sm text-destructive sm:col-span-2">{err}</p>}
             <Button type="submit" className="sm:col-span-2">{saved ? "Enregistré ✓" : "Enregistrer"}</Button>
           </form>
           <section><h3 className="mb-2 font-semibold text-primary">Cotisations</h3><PaymentsList payments={pays.data ?? []} /></section>
