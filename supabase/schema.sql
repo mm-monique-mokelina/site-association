@@ -62,7 +62,7 @@ create policy "members own update" on public.members for update to authenticated
 create or replace function public.protect_member_fields()
 returns trigger language plpgsql security definer set search_path = public as $$
 begin
-  if not public.is_admin() then
+  if auth.uid() is not null and not public.is_admin() then
     new.status := old.status; new.founder := old.founder; new.user_id := old.user_id;
     new.email := old.email; new.member_number := old.member_number; new.validated_at := old.validated_at;
     new.category := old.category;
@@ -86,7 +86,16 @@ create or replace function public.handle_new_user()
 returns trigger language plpgsql security definer set search_path = public as $$
 declare m jsonb := coalesce(new.raw_user_meta_data, '{}'::jsonb); mid uuid;
 begin
-  select id into mid from public.members where lower(email) = lower(new.email) and user_id is null;
+  select id into mid from public.members where lower(email) = lower(new.email) and user_id is null limit 1;
+  -- Sinon, on rattache la fiche d'un membre fondateur au même prénom et nom (fiche sans email)
+  if mid is null then
+    select id into mid from public.members
+      where user_id is null and email is null
+        and lower(trim(last_name)) = lower(trim(coalesce(m->>'last_name','')))
+        and lower(trim(first_name)) = lower(trim(coalesce(m->>'first_name','')))
+        and trim(coalesce(m->>'last_name','')) <> ''
+      limit 1;
+  end if;
   if mid is null then
     insert into public.members(user_id, email, first_name, last_name, phone, country, city, category, pole, accepted_statutes_at, rgpd_consent_at)
     values (new.id, lower(new.email),
@@ -95,9 +104,12 @@ begin
       case when m->>'category' = 'effectif' then 'effectif' else 'sympathisant' end, left(coalesce(m->>'pole',''),150),
       case when m->>'accept_statutes' = 'true' then now() end, case when m->>'rgpd' = 'true' then now() end);
   else
-    update public.members set user_id = new.id,
+    update public.members set user_id = new.id, email = lower(new.email),
       phone = case when phone = '' then left(coalesce(m->>'phone',''),40) else phone end,
       city = case when city = '' then left(coalesce(m->>'city',''),150) else city end,
+      pole = case when pole = '' then left(coalesce(m->>'pole',''),150) else pole end,
+      category = case when m->>'category' = 'effectif' then 'effectif' else category end,
+      status = case when status = 'founder' then 'pending' else status end,
       accepted_statutes_at = coalesce(accepted_statutes_at, case when m->>'accept_statutes' = 'true' then now() end),
       rgpd_consent_at = coalesce(rgpd_consent_at, case when m->>'rgpd' = 'true' then now() end)
     where id = mid;
