@@ -38,9 +38,9 @@ export function MemberCard({ member }: { member: Member }) {
           <Logo size={52} />
           <div>
             <p className="font-display text-lg font-semibold">M.M Monique Mokelina</p>
-            <p className="text-xs text-gold">{x("Carte de membre", "Membership card", "Carte ya lisangani")} {cardDates(member).year}</p>
+            <p className="text-xs text-gold">{x("Carte de membre", "Membership card", "Carte ya lisangani")}</p>
           </div>
-          <Flag country={member.country} className="ml-auto h-5 w-7 rounded-sm" />
+          <span className="ml-auto flex gap-1.5"><Flag country="FR" className="h-5 w-7 rounded-sm" /><Flag country="CD" className="h-5 w-7 rounded-sm" /></span>
         </div>
         <div className="mt-5 flex items-center gap-4 pb-3">
           {photo ? (
@@ -53,7 +53,7 @@ export function MemberCard({ member }: { member: Member }) {
           <div className="min-w-0">
             <p className="font-display text-2xl leading-tight">{member.first_name} <span className="uppercase">{member.last_name}</span></p>
             <p className="mt-1 text-sm text-gold">{categoryLabel(member)}</p>
-            <p className="text-sm text-primary-foreground/80">{member.country === "CD" ? "Congo (RDC)" : "France"}</p>
+            <p className="flex items-center gap-2 text-sm text-primary-foreground/80"><Flag country={member.country} className="h-3.5 w-5 rounded-[2px]" />{member.country === "CD" ? "Congo (RDC)" : "France"}</p>
             <p className="mt-2 text-xs text-primary-foreground/80">{x("Délivrée le", "Issued", "Epesami")} <strong>{cardDates(member).issued}</strong> · {x("valable jusqu'au", "valid until", "ekosila")} <strong>{cardDates(member).valid}</strong></p>
           </div>
         </div>

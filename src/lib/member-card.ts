@@ -100,8 +100,9 @@ export async function renderMemberCard(member: Member, photoUrl: string | null):
   ctx.fillStyle = "#FBF7F0"; ctx.font = '600 40px "Fraunces", Georgia, serif';
   ctx.fillText("M.M Monique Mokelina", 180, 82);
   ctx.fillStyle = "#E9C46A"; ctx.font = '600 22px "Source Sans 3", sans-serif';
-  ctx.fillText(`CARTE DE MEMBRE ${cardDates(member).year}`, 182, 120);
-  drawFlag(ctx, member.country, W - 40 - 96, 46, 96, 64);
+  ctx.fillText("CARTE DE MEMBRE", 182, 120);
+  drawFlag(ctx, "FR", W - 40 - 84 - 14 - 84, 50, 84, 56);
+  drawFlag(ctx, "CD", W - 40 - 84, 50, 84, 56);
 
   const px = 48, py = 190, pw = 250, ph = 310;
   ctx.save(); roundRect(ctx, px, py, pw, ph, 18); ctx.clip();
@@ -127,7 +128,8 @@ export async function renderMemberCard(member: Member, photoUrl: string | null):
   ctx.fillStyle = "#E9C46A"; ctx.font = '600 27px "Source Sans 3", sans-serif';
   ctx.fillText(categoryLabel(member), tx, 344);
   ctx.fillStyle = "rgba(251,247,240,0.85)"; ctx.font = '400 25px "Source Sans 3", sans-serif';
-  ctx.fillText(member.country === "CD" ? "Congo (RDC)" : "France", tx, 382);
+  drawFlag(ctx, member.country, tx, 360, 39, 26);
+  ctx.fillText(member.country === "CD" ? "Congo (RDC)" : "France", tx + 52, 382);
 
   const { issued, valid } = cardDates(member);
   const row = (label: string, value: string, y: number) => {
