@@ -3,7 +3,7 @@ export const en: Dict = {
   "nav.home": "Home",
   "nav.about": "About us",
   "nav.actions": "Our goal",
-  "nav.franceCongo": "France & Congo",
+  "nav.franceCongo": "France & Congo (DRC)",
   "nav.news": "News",
   "nav.donate": "Donate",
   "nav.volunteer": "Volunteer & partner",

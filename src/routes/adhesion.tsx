@@ -13,7 +13,7 @@ import { PaymentDeclare } from "@/components/site/PaymentDeclare";
 import { Flag } from "@/components/site/Flags";
 
 export const Route = createFileRoute("/adhesion")({
-  head: () => seo("Adhérer", "Devenez membre de l'Association M.M Monique Mokelina, en France ou au Congo."),
+  head: () => seo("Adhérer", "Devenez membre de l'Association M.M Monique Mokelina, en France ou au Congo (RDC)."),
   component: Page,
 });
 
@@ -55,7 +55,7 @@ function Page() {
 
   return (
     <>
-      <PageHero title={x("Adhérer à l'association", "Join the association", "Kokota na lisangani")} intro={x("Rejoignez-nous en France ou au Congo, en quelques étapes.", "Join us in France or Congo in a few steps.", "Bokota elongo na biso na France to na Kongo, na mwa matambe.")} />
+      <PageHero title={x("Adhérer à l'association", "Join the association", "Kokota na lisangani")} intro={x("Rejoignez-nous en France ou au Congo (RDC), en quelques étapes.", "Join us in France or Congo (RDC) in a few steps.", "Bokota elongo na biso na France to na Kongo (RDC), na mwa matambe.")} />
       <div className="container-page py-10">
         <ol className="mb-8 grid grid-cols-3 gap-2 sm:grid-cols-6" aria-label={x("Étapes", "Steps", "Matambe")}>
           {steps.map((label, i) => (
@@ -73,7 +73,7 @@ function Page() {
                 {(["FR", "CD"] as const).map((c) => (
                   <button key={c} type="button" onClick={() => setCountry(c)} className={`flex items-center gap-3 rounded-xl border-2 p-5 text-left ${country === c ? "border-primary bg-primary/5" : "border-border"}`}>
                     <Flag country={c} className="h-6 w-9 rounded-sm" />
-                    <span className="font-display text-lg font-semibold">{c === "FR" ? "France" : x("Congo (RDC)", "Congo (DRC)", "Kongo (RDC)")}</span>
+                    <span className="font-display text-lg font-semibold">{c === "FR" ? "France" : x("Congo (RDC)", "Congo (RDC)", "Kongo (RDC)")}</span>
                   </button>
                 ))}
               </div>

@@ -10,6 +10,7 @@ import { DONATIONS, ASSOCIATION_FOLDERS } from "@/lib/labels";
 import { PageHero } from "@/components/site/RichText";
 import { Field, inputClass } from "@/components/forms/Fields";
 import { MemberCard, PaymentsList, FileList, type MemberFile, type Payment } from "@/components/member/shared";
+import { Flag } from "@/components/site/Flags";
 
 export const Route = createFileRoute("/admin")({
   head: () => seo("Administration", "Administration — Association M.M Monique Mokelina."),
@@ -133,7 +134,7 @@ function PendingMembers() {
         {list.map((m) => (
           <li key={m.id} className="flex flex-wrap items-center gap-3 rounded-xl border bg-card p-4">
             <div className="flex-1">
-              <p className="font-semibold">{fullName(m)} <span className="text-sm font-normal text-muted-foreground">· {m.country === "CD" ? "Congo" : "France"} · {m.city}</span></p>
+              <p className="font-semibold">{fullName(m)} <span className="text-sm font-normal text-muted-foreground">· <Flag country={m.country} className="inline h-3 w-4 rounded-[2px]" /> {m.country === "CD" ? "Congo (RDC)" : "France"} · {m.city}</span></p>
               <p className="text-sm text-muted-foreground">{m.email} · {m.phone} · {m.category} · demandé le {fmt(m.created_at)}</p>
             </div>
             <Button size="sm" onClick={() => setStatus(m.id, "validated")}>Valider</Button>
@@ -166,7 +167,7 @@ function MembersTab() {
       <div className="mb-4 flex flex-wrap gap-3">
         <input placeholder="Rechercher un nom ou un email" value={q} onChange={(e) => setQ(e.target.value)} className={`${inputClass} max-w-xs`} />
         <select value={country} onChange={(e) => setCountry(e.target.value)} className={`${inputClass} max-w-[180px]`}>
-          <option value="">Tous les pays</option><option value="FR">France</option><option value="CD">Congo</option>
+          <option value="">Tous les pays</option><option value="FR">France</option><option value="CD">Congo (RDC)</option>
         </select>
         <select value={sort} onChange={(e) => setSort(e.target.value as "number" | "name" | "country")} className={`${inputClass} max-w-[220px]`} aria-label="Trier">
           <option value="number">Trier par numéro</option><option value="name">Trier par nom (A → Z)</option><option value="country">Trier par pays</option>
@@ -182,7 +183,7 @@ function MembersTab() {
               <tr key={m.id} className="cursor-pointer border-t hover:bg-accent" onClick={() => setOpen(m)}>
                 <td className="p-3">{m.member_number}</td>
                 <td className="p-3 font-semibold text-primary underline">{fullName(m)}</td>
-                <td className="p-3">{m.country === "CD" ? "Congo" : "France"}</td>
+                <td className="p-3"><span className="inline-flex items-center gap-2"><Flag country={m.country} className="h-3.5 w-5 rounded-[2px]" />{m.country === "CD" ? "Congo (RDC)" : "France"}</span></td>
                 <td className="p-3">{statusLabel[m.status] ?? m.status}</td>
                 <td className="p-3">{m.user_id ? "Oui" : "Non"}</td>
               </tr>
@@ -210,7 +211,7 @@ function AddMember({ onDone }: { onDone: () => void }) {
       <Field label="Prénom"><input name="first_name" className={inputClass} /></Field>
       <Field label="Nom"><input name="last_name" required className={inputClass} /></Field>
       <Field label="Email (pour relier son futur compte)"><input name="email" type="email" className={inputClass} /></Field>
-      <Field label="Pays"><select name="country" className={inputClass}><option value="FR">France</option><option value="CD">Congo</option></select></Field>
+      <Field label="Pays"><select name="country" className={inputClass}><option value="FR">France</option><option value="CD">Congo (RDC)</option></select></Field>
       <Field label="Ville"><input name="city" className={inputClass} /></Field>
       <label className="flex items-center gap-2 text-sm"><input type="checkbox" name="founder" className="size-4 accent-primary" /> Membre fondateur</label>
       <Button type="submit" className="sm:col-span-3">Enregistrer la fiche</Button>
@@ -272,7 +273,7 @@ function MemberSheet({ member: initial, back }: { member: Member; back: () => vo
             <Field label="Email"><input name="email" type="email" defaultValue={member.email ?? ""} className={inputClass} /></Field>
             <Field label="Téléphone"><input name="phone" defaultValue={member.phone} className={inputClass} /></Field>
             <Field label="Ville"><input name="city" defaultValue={member.city} className={inputClass} /></Field>
-            <Field label="Pays"><select name="country" defaultValue={member.country} className={inputClass}><option value="FR">France</option><option value="CD">Congo</option></select></Field>
+            <Field label="Pays"><select name="country" defaultValue={member.country} className={inputClass}><option value="FR">France</option><option value="CD">Congo (RDC)</option></select></Field>
             <Field label="Catégorie"><select name="category" defaultValue={member.category} className={inputClass}><option value="effectif">Effectif</option><option value="sympathisant">Sympathisant</option></select></Field>
             <Field label="Statut"><select name="status" defaultValue={member.status} className={inputClass}><option value="pending">En attente</option><option value="validated">Validé</option><option value="refused">Refusé</option><option value="founder">Fondateur · à compléter</option></select></Field>
             <p className="text-xs text-muted-foreground sm:col-span-2">Compte relié : {member.user_id ? "oui" : "non"} · Consentement documents : {member.documents_consent_at ? `oui, le ${fmt(member.documents_consent_at)}` : "pas encore"}</p>
@@ -481,9 +482,9 @@ const SETTINGS: { key: string; label: string; help?: string }[] = [
   { key: "contact_email", label: "Email de contact" },
   { key: "fee_fr_join", label: "France — droit d'adhésion (€)" },
   { key: "fee_fr_monthly", label: "France — mensualité (€)" },
-  { key: "fee_cd_join", label: "Congo — droit d'adhésion" },
-  { key: "fee_cd_monthly", label: "Congo — mensualité" },
-  { key: "fee_cd_currency", label: "Congo — devise (USD ou CDF)" },
+  { key: "fee_cd_join", label: "Congo (RDC) — droit d'adhésion" },
+  { key: "fee_cd_monthly", label: "Congo (RDC) — mensualité" },
+  { key: "fee_cd_currency", label: "Congo (RDC) — devise (USD ou CDF)" },
 ];
 function SettingsTab() {
   const qc = useQueryClient();

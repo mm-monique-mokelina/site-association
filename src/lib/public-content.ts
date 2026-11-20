@@ -1,14 +1,14 @@
 import type { Lang } from "@/i18n";
 export const PUBLIC_CONTENT: Record<string, Record<Lang,string>> = {
   "home.mission": {
-    "fr": "Relier la France et le Congo pour aider les enfants, les jeunes, les filles-mères et les femmes maraîchères de RDC à prendre leur avenir en main.",
-    "en": "Connecting France and Congo to help children, young people, young mothers and women market gardeners in the DRC take their future into their own hands.",
-    "ln": "Kosangisa France mpe Kongo mpo na kosalisa bana, bilenge, bamama ya bilenge mpe basi oyo balonaka ndunda na RDC bámikamba mpo na lobi na bango."
+    "fr": "Relier la France et le Congo (RDC) pour aider les enfants, les jeunes, les filles-mères et les femmes maraîchères de RDC à prendre leur avenir en main.",
+    "en": "Connecting France and Congo (DRC) to help children, young people, young mothers and women market gardeners in the DRC take their future into their own hands.",
+    "ln": "Kosangisa France mpe Kongo (RDC) mpo na kosalisa bana, bilenge, bamama ya bilenge mpe basi oyo balonaka ndunda na RDC bámikamba mpo na lobi na bango."
   },
   "home.intro": {
-    "fr": "Association sans but lucratif de droit congolais, notre siège est à Kinshasa. Nos membres en France et au Congo unissent leurs forces au service des familles congolaises.",
-    "en": "A non-profit association under Congolese law, based in Kinshasa. Our members in France and Congo work together for Congolese families.",
-    "ln": "Lisangani oyo elukaka litomba te na mibeko ya Kongo, na biro monene na Kinshasa. Bato na biso na France mpe na Kongo basangisaka makasi mpo na mabota ya Kongo."
+    "fr": "Association sans but lucratif de droit congolais, notre siège est à Kinshasa. Nos membres en France et au Congo (RDC) unissent leurs forces au service des familles congolaises.",
+    "en": "A non-profit association under Congolese law, based in Kinshasa. Our members in France and Congo (DRC) work together for Congolese families.",
+    "ln": "Lisangani oyo elukaka litomba te na mibeko ya Kongo (RDC), na biro monene na Kinshasa. Bato na biso na France mpe na Kongo (RDC) basangisaka makasi mpo na mabota ya Kongo (RDC)."
   },
   "home.public1_title": {
     "fr": "Enfants et jeunes",
@@ -43,7 +43,7 @@ export const PUBLIC_CONTENT: Record<string, Record<Lang,string>> = {
   "about.intro": {
     "fr": "Deux pays, une même solidarité au service des familles congolaises.",
     "en": "Two countries, shared solidarity for Congolese families.",
-    "ln": "Bikolo mibale, bomoko moko mpo na mabota ya Kongo."
+    "ln": "Bikolo mibale, bomoko moko mpo na mabota ya Kongo (RDC)."
   },
   "about.tribute": {
     "fr": "Le nom de l'association rend hommage aux parents du fondateur : Monique, le prénom de sa mère, qui a toujours œuvré dans le social, et Mokelina, le nom de son père.",
@@ -51,24 +51,24 @@ export const PUBLIC_CONTENT: Record<string, Record<Lang,string>> = {
     "ln": "Nkombo ya lisangani ekumisaka baboti ya mobandisi: Monique, nkombo ya mama na ye oyo asalaki ntango nyonso mpo na kosalisa bato, mpe Mokelina, nkombo ya tata na ye."
   },
   "about.vision": {
-    "fr": "Nous voulons une RDC où chaque enfant peut aller à l'école, où chaque jeune maman peut apprendre un métier et où chaque femme peut nourrir sa famille dignement. Pour y arriver, nous unissons les forces de la diaspora en France et des acteurs de terrain au Congo.",
-    "en": "We want a DRC where every child can go to school, every young mother can learn a trade and every woman can feed her family with dignity. We unite the Congolese diaspora in France with local teams in Congo.",
-    "ln": "Tolingi RDC oyo mwana nyonso akoki kokende kelasi, mama nyonso ya elenge akoki koyekola mosala mpe mwasi nyonso akoki koleisa libota na ye na lokumu. Mpo na yango, tosangisaka makasi ya diaspora na France mpe ya bato oyo basalaka na Kongo."
+    "fr": "Nous voulons une RDC où chaque enfant peut aller à l'école, où chaque jeune maman peut apprendre un métier et où chaque femme peut nourrir sa famille dignement. Pour y arriver, nous unissons les forces de la diaspora en France et des acteurs de terrain au Congo (RDC).",
+    "en": "We want a DRC where every child can go to school, every young mother can learn a trade and every woman can feed her family with dignity. We unite the Congolese diaspora in France with local teams in Congo (DRC).",
+    "ln": "Tolingi RDC oyo mwana nyonso akoki kokende kelasi, mama nyonso ya elenge akoki koyekola mosala mpe mwasi nyonso akoki koleisa libota na ye na lokumu. Mpo na yango, tosangisaka makasi ya diaspora na France mpe ya bato oyo basalaka na Kongo (RDC)."
   },
   "about.founder": {
-    "fr": "Originaire du Congo et installé en France, notre fondateur a créé cette association pour relier ses deux pays et mettre l'énergie de la diaspora au service des familles congolaises.",
-    "en": "Originally from Congo and living in France, our founder created this association to connect his two countries and put the diaspora’s energy at the service of Congolese families.",
-    "ln": "Mobandisi na biso autá na Kongo mpe afandaka na France. Asalaki lisangani oyo mpo na kokangisa bikolo na ye mibale mpe kosalela makasi ya diaspora mpo na mabota ya Kongo."
+    "fr": "Originaire du Congo (RDC) et installé en France, notre fondateur a créé cette association pour relier ses deux pays et mettre l'énergie de la diaspora au service des familles congolaises.",
+    "en": "Originally from Congo (DRC) and living in France, our founder created this association to connect his two countries and put the diaspora’s energy at the service of Congolese families.",
+    "ln": "Mobandisi na biso autá na Kongo (RDC) mpe afandaka na France. Asalaki lisangani oyo mpo na kokangisa bikolo na ye mibale mpe kosalela makasi ya diaspora mpo na mabota ya Kongo (RDC)."
   },
   "about.board": {
-    "fr": "Le bureau est composé de membres basés en France et au Congo.",
-    "en": "The board consists of members based in France and Congo.",
-    "ln": "Biro ezali na bato oyo bafandaka na France mpe na Kongo."
+    "fr": "Le bureau est composé de membres basés en France et au Congo (RDC).",
+    "en": "The board consists of members based in France and Congo (DRC).",
+    "ln": "Biro ezali na bato oyo bafandaka na France mpe na Kongo (RDC)."
   },
   "fc.intro": {
-    "fr": "La solidarité circule entre la France et le Congo, au plus près des besoins des familles.",
-    "en": "Solidarity connects France and Congo, close to families’ needs.",
-    "ln": "Bomoko esangisaka France mpe Kongo, pene na bamposa ya mabota."
+    "fr": "La solidarité circule entre la France et le Congo (RDC), au plus près des besoins des familles.",
+    "en": "Solidarity connects France and Congo (DRC), close to families’ needs.",
+    "ln": "Bomoko esangisaka France mpe Kongo (RDC), pene na bamposa ya mabota."
   },
   "fc.france_text": {
     "fr": "Les membres mobilisent leur temps, leurs compétences et les collectes pour soutenir les projets.",
@@ -83,7 +83,7 @@ export const PUBLIC_CONTENT: Record<string, Record<Lang,string>> = {
   "legal.text": {
     "fr": "Éditeur : Association M.M Monique Mokelina, association sans but lucratif de droit congolais.\nSiège : Kinshasa, RDC.\nContact : m.mokelina@hotmail.com.\nHébergement : Lovable.",
     "en": "Publisher: M.M Monique Mokelina, a non-profit association under Congolese law.\nHeadquarters: Kinshasa, DRC.\nContact: m.mokelina@hotmail.com.\nHosting: Lovable.",
-    "ln": "Mobimisi: Lisangani M.M Monique Mokelina, lisangani oyo elukaka litomba te na mibeko ya Kongo.\nBiro monene: Kinshasa, RDC.\nKosolola: m.mokelina@hotmail.com.\nEsika ya site: Lovable."
+    "ln": "Mobimisi: Lisangani M.M Monique Mokelina, lisangani oyo elukaka litomba te na mibeko ya Kongo (RDC).\nBiro monene: Kinshasa, RDC.\nKosolola: m.mokelina@hotmail.com.\nEsika ya site: Lovable."
   },
   "privacy.text": {
     "fr": "Vos données servent à répondre à vos demandes et à gérer votre adhésion. Les dossiers et documents sont confidentiels : seuls le membre concerné et les deux administrateurs peuvent les consulter. Les documents de l'association sont réservés aux administrateurs. Pour exercer vos droits d'accès, de rectification ou d'effacement, écrivez à m.mokelina@hotmail.com.",
@@ -111,9 +111,9 @@ export const PUBLIC_CONTENT: Record<string, Record<Lang,string>> = {
     "ln": "Bosala elongo na biso"
   },
   "home.cta_text": {
-    "fr": "Adhérez, faites un don ou rejoignez-nous comme bénévole, en France ou au Congo.",
-    "en": "Join, donate or volunteer with us, in France or Congo.",
-    "ln": "Bokota, bopesa likabo to bosala lokola basungi na France to na Kongo."
+    "fr": "Adhérez, faites un don ou rejoignez-nous comme bénévole, en France ou au Congo (RDC).",
+    "en": "Join, donate or volunteer with us, in France or Congo (DRC).",
+    "ln": "Bokota, bopesa likabo to bosala lokola basungi na France to na Kongo (RDC)."
   },
   "about.tribute_title": {
     "fr": "Hommage",
@@ -151,9 +151,9 @@ export const PUBLIC_CONTENT: Record<string, Record<Lang,string>> = {
     "ln": "Bopesa ntango, bokabola mayele to bopesa boyokani ya mosala."
   },
   "join.intro": {
-    "fr": "Rejoignez notre association en France ou au Congo.",
-    "en": "Join our association in France or Congo.",
-    "ln": "Bokota na lisangani na biso na France to na Kongo."
+    "fr": "Rejoignez notre association en France ou au Congo (RDC).",
+    "en": "Join our association in France or Congo (DRC).",
+    "ln": "Bokota na lisangani na biso na France to na Kongo (RDC)."
   },
   "contact.intro": {
     "fr": "Une question, une idée, une proposition ? Écrivez-nous.",

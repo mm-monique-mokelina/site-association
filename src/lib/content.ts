@@ -34,7 +34,7 @@ export const CONTENT: ContentSection[] = [
       { key: "home.mission", label: "Mission en une phrase", fr: `${T} — Notre mission en une phrase.`, en: `${TE} — Our mission in one sentence.`, long: true },
       { key: "home.hero_image", label: "Image d'accueil (facultative)", fr: "", image: true },
       { key: "home.intro_title", label: "Titre présentation", fr: "Qui nous sommes", en: "Who we are" },
-      { key: "home.intro", label: "Texte de présentation", fr: `Association sans but lucratif de droit congolais, dont le siège est à Kinshasa, avec des membres en France et au Congo. ${T}`, en: `Non-profit association under Congolese law, headquartered in Kinshasa, with members in France and Congo. ${TE}`, long: true },
+      { key: "home.intro", label: "Texte de présentation", fr: `Association sans but lucratif de droit congolais, dont le siège est à Kinshasa, avec des membres en France et au Congo (RDC). ${T}`, en: `Non-profit association under Congolese law, headquartered in Kinshasa, with members in France and Congo (RDC). ${TE}`, long: true },
       { key: "home.public1_title", label: "Public 1 — titre", fr: "Les filles-mères", en: "Young mothers" },
       { key: "home.public1_text", label: "Public 1 — texte", fr: `Formation aux métiers et accompagnement. ${T}`, en: `Vocational training and support. ${TE}`, long: true },
       { key: "home.public2_title", label: "Public 2 — titre", fr: "Les femmes maraîchères", en: "Women market gardeners" },
@@ -42,7 +42,7 @@ export const CONTENT: ContentSection[] = [
       { key: "home.public3_title", label: "Public 3 — titre", fr: "Les jeunes et les enfants", en: "Youth and children" },
       { key: "home.public3_text", label: "Public 3 — texte", fr: `Activités pour les jeunes et protection de l'enfance. ${T}`, en: `Youth activities and child protection. ${TE}`, long: true },
       { key: "home.cta_title", label: "Titre appel à l'action", fr: "Agissez avec nous", en: "Act with us" },
-      { key: "home.cta_text", label: "Texte appel à l'action", fr: "Adhérez, faites un don ou rejoignez-nous comme bénévole, en France ou au Congo.", en: "Join, donate or volunteer with us, in France or in Congo.", long: true },
+      { key: "home.cta_text", label: "Texte appel à l'action", fr: "Adhérez, faites un don ou rejoignez-nous comme bénévole, en France ou au Congo (RDC).", en: "Join, donate or volunteer with us, in France or in Congo (RDC).", long: true },
     ],
   },
   {
@@ -77,13 +77,13 @@ export const CONTENT: ContentSection[] = [
   },
   {
     id: "fc",
-    title: "France et Congo",
+    title: "France et Congo (RDC)",
     fields: [
       { key: "fc.intro", label: "Introduction", fr: T, en: TE, long: true },
       { key: "fc.france", label: "En France (une action par ligne)", fr: "Mobilisation de la diaspora\nCollecte de dons et de matériel\nParrainage\nFormation à distance", en: "Mobilising the diaspora\nCollecting donations and equipment\nSponsorship\nRemote training", long: true },
       { key: "fc.france_text", label: "En France — détails", fr: T, en: TE, long: true },
-      { key: "fc.congo", label: "Au Congo (une action par ligne)", fr: "Projets de terrain à Kinshasa", en: "Field projects in Kinshasa", long: true },
-      { key: "fc.congo_text", label: "Au Congo — détails", fr: T, en: TE, long: true },
+      { key: "fc.congo", label: "Au Congo (RDC) (une action par ligne)", fr: "Projets de terrain à Kinshasa", en: "Field projects in Kinshasa", long: true },
+      { key: "fc.congo_text", label: "Au Congo (RDC) — détails", fr: T, en: TE, long: true },
     ],
   },
   {
@@ -103,7 +103,7 @@ export const CONTENT: ContentSection[] = [
   {
     id: "join",
     title: "Adhésion",
-    fields: [{ key: "join.intro", label: "Introduction", fr: "Devenez membre de l'association et participez à la vie de nos projets, en France comme au Congo. L'adhésion se règle au mois.", en: "Become a member and take part in our projects, in France and in Congo. Membership is paid monthly.", long: true }],
+    fields: [{ key: "join.intro", label: "Introduction", fr: "Devenez membre de l'association et participez à la vie de nos projets, en France comme au Congo (RDC). L'adhésion se règle au mois.", en: "Become a member and take part in our projects, in France and in Congo (RDC). Membership is paid monthly.", long: true }],
   },
   {
     id: "contact",

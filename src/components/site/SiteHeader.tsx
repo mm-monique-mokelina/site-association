@@ -51,15 +51,15 @@ export function SiteHeader() {
             <span className="hidden text-xs text-muted-foreground sm:block">Ensemble pour un avenir meilleur</span>
           </span>
         </Link>
-        <nav className="ml-auto hidden items-center gap-1 xl:flex">
+        <nav className="ml-auto hidden items-center gap-1 2xl:flex">
           {NAV.map((n) => (
             <Link key={n.to} to={n.to} activeOptions={{ exact: n.to === "/" }}
-              className="rounded-md px-2.5 py-1.5 text-sm text-foreground/80 hover:bg-accent hover:text-accent-foreground data-[status=active]:font-semibold data-[status=active]:text-primary">
+              className="whitespace-nowrap rounded-md px-2.5 py-1.5 text-sm text-foreground/80 hover:bg-accent hover:text-accent-foreground data-[status=active]:font-semibold data-[status=active]:text-primary">
               {t(n.k)}
             </Link>
           ))}
         </nav>
-        <div className="ml-auto flex items-center gap-2 xl:ml-2">
+        <div className="ml-auto flex items-center gap-2 2xl:ml-2">
           <div className="hidden md:block"><LangSwitch /></div>
           <Button asChild variant="gold" size="sm" className="hidden sm:inline-flex"><Link to="/don">{t("nav.donate")}</Link></Button>
           {session ? (
@@ -71,7 +71,7 @@ export function SiteHeader() {
           )}
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="xl:hidden" aria-label={t("nav.menu")}><Menu /></Button>
+              <Button variant="ghost" size="icon" className="2xl:hidden" aria-label={t("nav.menu")}><Menu /></Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-72 overflow-y-auto">
               <SheetTitle className="font-display text-primary">{t("nav.menu")}</SheetTitle>

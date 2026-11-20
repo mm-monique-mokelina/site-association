@@ -15,7 +15,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "M.M Monique Mokelina — Ensemble pour un avenir meilleur" },
-      { name: "description", content: "Association congolaise au service des jeunes, des enfants et des femmes en RDC, avec des membres en France et au Congo." },
+      { name: "description", content: "Association congolaise au service des jeunes, des enfants et des femmes en RDC, avec des membres en France et au Congo (RDC)." },
       { property: "og:title", content: "M.M Monique Mokelina — Ensemble pour un avenir meilleur" },
       { property: "og:description", content: "Association au service des jeunes, des enfants et des femmes en RDC." },
       { property: "og:type", content: "website" },

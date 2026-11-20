@@ -2,7 +2,7 @@ export const fr = {
   "nav.home": "Accueil",
   "nav.about": "Qui sommes-nous",
   "nav.actions": "Notre but",
-  "nav.franceCongo": "France & Congo",
+  "nav.franceCongo": "France & Congo (RDC)",
   "nav.news": "Actualités",
   "nav.donate": "Faire un don",
   "nav.volunteer": "Bénévolat & partenariat",
