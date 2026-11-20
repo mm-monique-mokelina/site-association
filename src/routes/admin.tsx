@@ -1,12 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { LayoutDashboard, UserCheck, Users, Wallet, Gift, Mail, HandHeart, FolderLock, Settings, ArrowLeft, Upload } from "lucide-react";
+import { LayoutDashboard, UserCheck, Users, Wallet, Mail, HandHeart, FolderLock, Settings, ArrowLeft, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { seo } from "@/lib/seo";
 import { useMe, safeFileName, type Member } from "@/lib/auth";
-import { DONATIONS, ASSOCIATION_FOLDERS } from "@/lib/labels";
+import { ASSOCIATION_FOLDERS } from "@/lib/labels";
 import { PageHero } from "@/components/site/RichText";
 import { Field, inputClass } from "@/components/forms/Fields";
 import { MemberCard, PaymentsList, FileList, PhotoUpload, type MemberFile, type Payment } from "@/components/member/shared";
@@ -17,13 +17,12 @@ export const Route = createFileRoute("/admin")({
   component: Page,
 });
 
-type Tab = "dash" | "pending" | "members" | "payments" | "dons" | "messages" | "volunteers" | "docs" | "settings";
+type Tab = "dash" | "pending" | "members" | "payments" | "messages" | "volunteers" | "docs" | "settings";
 const TABS: { id: Tab; label: string; icon: typeof Users }[] = [
   { id: "dash", label: "Tableau de bord", icon: LayoutDashboard },
   { id: "pending", label: "Adhésions à valider", icon: UserCheck },
   { id: "members", label: "Membres", icon: Users },
   { id: "payments", label: "Cotisations et paiements", icon: Wallet },
-  { id: "dons", label: "Dons", icon: Gift },
   { id: "messages", label: "Messages", icon: Mail },
   { id: "volunteers", label: "Bénévoles et partenaires", icon: HandHeart },
   { id: "docs", label: "Documents de l'association", icon: FolderLock },
@@ -74,7 +73,6 @@ function Page() {
           {tab === "pending" && <PendingMembers />}
           {tab === "members" && <MembersTab />}
           {tab === "payments" && <PaymentsTab />}
-          {tab === "dons" && <DonsTab />}
           {tab === "messages" && <MessagesTab />}
           {tab === "volunteers" && <VolunteersTab />}
           {tab === "docs" && <DocsTab />}
@@ -94,13 +92,11 @@ function Dashboard({ go }: { go: (t: Tab) => void }) {
   const pays = useTable<Payment>("payments");
   const msgs = useTable<{ handled: boolean }>("contact_messages");
   const vols = useTable<{ handled: boolean }>("volunteer_requests");
-  const dons = useTable<{ handled: boolean }>("donation_pledges");
   const cards: { label: string; n: number; tab: Tab }[] = [
     { label: "Adhésions à valider", n: (members.data ?? []).filter((m) => m.status === "pending").length, tab: "pending" },
     { label: "Paiements à confirmer", n: (pays.data ?? []).filter((p) => p.status === "pending").length, tab: "payments" },
     { label: "Messages non traités", n: (msgs.data ?? []).filter((m) => !m.handled).length, tab: "messages" },
     { label: "Bénévoles et partenaires", n: (vols.data ?? []).filter((m) => !m.handled).length, tab: "volunteers" },
-    { label: "Promesses de don", n: (dons.data ?? []).filter((m) => !m.handled).length, tab: "dons" },
     { label: "Membres validés", n: (members.data ?? []).filter((m) => m.status === "validated").length, tab: "members" },
   ];
   return (
@@ -339,37 +335,6 @@ function Handled({ table, id, handled }: { table: string; id: string; handled: b
       <input type="checkbox" checked={handled} className="size-4 accent-primary" onChange={async (e) => { await supabase.from(table).update({ handled: e.target.checked }).eq("id", id); qc.invalidateQueries({ queryKey: ["admin", table] }); }} />
       Traité
     </label>
-  );
-}
-
-type Pledge = { id: string; name: string; email: string; amount: number; method: string; destination: string; handled: boolean; created_at: string };
-function DonsTab() {
-  const dons = useTable<Pledge>("donation_pledges");
-  const [dest, setDest] = useState("");
-  const list = (dons.data ?? []).filter((d) => !dest || d.destination === dest);
-  const total = (id: string) => (dons.data ?? []).filter((d) => d.destination === id).reduce((s, d) => s + Number(d.amount), 0);
-  return (
-    <>
-      <H>Promesses de don</H>
-      <div className="mb-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        {DONATIONS.map((d) => <div key={d.id} className="rounded-xl border bg-card p-4"><p className="text-sm text-muted-foreground">{d.fr}</p><p className="font-display text-2xl text-primary">{total(d.id).toFixed(2)}</p></div>)}
-      </div>
-      <select value={dest} onChange={(e) => setDest(e.target.value)} className={`${inputClass} mb-4 max-w-xs`}>
-        <option value="">Toutes les destinations</option>
-        {DONATIONS.map((d) => <option key={d.id} value={d.id}>{d.fr}</option>)}
-      </select>
-      <ul className="space-y-2">
-        {list.map((d) => (
-          <li key={d.id} className="flex flex-wrap items-center gap-3 rounded-xl border bg-card p-3 text-sm">
-            <span className="flex-1"><strong>{d.name}</strong> · {d.email} · {fmt(d.created_at)}</span>
-            <span>{DONATIONS.find((x) => x.id === d.destination)?.fr}</span>
-            <span className="font-semibold">{Number(d.amount).toFixed(2)} · {d.method}</span>
-            <Handled table="donation_pledges" id={d.id} handled={d.handled} />
-          </li>
-        ))}
-        {!list.length && <p className="text-muted-foreground">Aucune promesse de don.</p>}
-      </ul>
-    </>
   );
 }
 

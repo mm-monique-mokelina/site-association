@@ -4,11 +4,8 @@ import { BookOpen, Scissors, Sprout, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { seo } from "@/lib/seo";
 import { useText, DONATIONS } from "@/lib/labels";
-import { pledgeSchema } from "@/lib/submission-schemas";
-import { sendPledge } from "@/lib/submissions";
 import { PageHero, Lines } from "@/components/site/RichText";
 import { BankInfo, MobileInfo, PaypalButton } from "@/components/site/PaymentInfo";
-import { Field, inputClass, Feedback } from "@/components/forms/Fields";
 
 export const Route = createFileRoute("/don")({
   head: () => seo("Faire un don", "Soutenez les enfants et les jeunes, les filles-mères et les femmes maraîchères en RDC."),
@@ -20,8 +17,6 @@ type Dest = (typeof DONATIONS)[number]["id"];
 function Don() {
   const x = useText();
   const [dest, setDest] = useState<Dest>("general");
-  const [busy, setBusy] = useState(false);
-  const [state, setState] = useState<"idle" | "ok" | "error">("idle");
   const current = DONATIONS.find((d) => d.id === dest) ?? DONATIONS[3];
   const usage = [
     { icon: BookOpen, t: x("Des fournitures et des kits pour l'école", "School supplies and kits", "Biloko mpe bisaleli ya kelasi") },
@@ -29,19 +24,6 @@ function Don() {
     { icon: Sprout, t: x("Des semences et des outils pour les maraîchères", "Seeds and tools for market gardeners", "Mboto mpe bisaleli mpo na basi baloni ndunda") },
     { icon: Trophy, t: x("Des activités pour les jeunes", "Activities for young people", "Misala mpo na bilenge") },
   ];
-  const pledge = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const f = new FormData(e.currentTarget);
-    setBusy(true);
-    try {
-      await sendPledge({ data: pledgeSchema.parse({ name: f.get("name"), email: f.get("email"), amount: f.get("amount"), method: f.get("method"), destination: dest }) });
-      setState("ok");
-    } catch {
-      setState("error");
-    } finally {
-      setBusy(false);
-    }
-  };
   return (
     <>
       <PageHero title={x("Faire un don", "Donate", "Kopesa likabo")} intro={x("Chaque don, même modeste, aide directement les enfants et les jeunes, les filles-mères et les femmes maraîchères que nous accompagnons.", "Every gift, however small, directly helps the children, young people, young mothers and women market gardeners we support.", "Likabo nyonso, ata moke, esalisaka mbala moko bana, bilenge, bamama ya bilenge mpe basi baloni ndunda.")} />
@@ -89,22 +71,6 @@ function Don() {
           <BankInfo reference={current.reference} />
           <MobileInfo />
           <PaypalButton />
-          <section className="rounded-2xl border p-5">
-            <h3 className="text-lg font-semibold text-primary">{x("Je fais une promesse de don", "I make a pledge", "Nalaki likabo")}</h3>
-            {state === "ok" ? <Feedback success /> : (
-              <form onSubmit={pledge} className="mt-3 grid gap-3 sm:grid-cols-2">
-                <Field label={x("Nom", "Name", "Nkombo")}><input name="name" required maxLength={150} className={inputClass} /></Field>
-                <Field label="Email"><input name="email" type="email" required maxLength={255} className={inputClass} /></Field>
-                <Field label={x("Montant prévu", "Planned amount", "Motango")}><input name="amount" type="number" min="1" step="0.01" required className={inputClass} /></Field>
-                <Field label={x("Moyen", "Method", "Lolenge")}>
-                  <select name="method" className={inputClass}><option>Virement</option><option>PayPal</option><option>Mobile money</option></select>
-                </Field>
-                <p className="text-sm text-muted-foreground sm:col-span-2">{x("Destination :", "Destination:", "Esika:")} {x(current.fr, current.en, current.ln)}</p>
-                <Feedback error={state === "error"} />
-                <Button type="submit" disabled={busy} className="sm:col-span-2">{busy ? "…" : x("Envoyer", "Send", "Kotinda")}</Button>
-              </form>
-            )}
-          </section>
         </div>
       </div>
     </>
