@@ -1,4 +1,14 @@
+import QRCode from "qrcode";
 import type { Member } from "@/lib/auth";
+
+export const SITE_URL = "https://mm-monique-mokelina.netlify.app";
+
+/** Date de délivrance (mois/année) et validité (fin de l'année de délivrance). */
+export function cardDates(m: Member) {
+  const d = m.validated_at ? new Date(m.validated_at) : new Date();
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  return { issued: `${mm}/${d.getFullYear()}`, valid: `12/${d.getFullYear()}`, year: d.getFullYear() };
+}
 
 const W = 1012; // format carte bancaire (85,6 × 54 mm) à ~300 dpi
 const H = 638;
@@ -90,7 +100,7 @@ export async function renderMemberCard(member: Member, photoUrl: string | null):
   ctx.fillStyle = "#FBF7F0"; ctx.font = '600 40px "Fraunces", Georgia, serif';
   ctx.fillText("M.M Monique Mokelina", 180, 82);
   ctx.fillStyle = "#E9C46A"; ctx.font = '600 22px "Source Sans 3", sans-serif';
-  ctx.fillText(`CARTE DE MEMBRE ${new Date().getFullYear()}`, 182, 120);
+  ctx.fillText(`CARTE DE MEMBRE ${cardDates(member).year}`, 182, 120);
   drawFlag(ctx, member.country, W - 40 - 96, 46, 96, 64);
 
   const px = 48, py = 190, pw = 250, ph = 310;
@@ -110,16 +120,39 @@ export async function renderMemberCard(member: Member, photoUrl: string | null):
 
   const tx = 340, maxW = W - tx - 48;
   ctx.fillStyle = "#FBF7F0";
-  fitText(ctx, member.first_name, maxW, 54, '"Fraunces", Georgia, serif');
-  ctx.fillText(member.first_name, tx, 268);
-  fitText(ctx, member.last_name.toUpperCase(), maxW, 54, '"Fraunces", Georgia, serif');
-  ctx.fillText(member.last_name.toUpperCase(), tx, 330);
-  ctx.fillStyle = "#E9C46A"; ctx.font = '600 28px "Source Sans 3", sans-serif';
-  ctx.fillText(categoryLabel(member), tx, 392);
-  ctx.fillStyle = "rgba(251,247,240,0.85)"; ctx.font = '400 26px "Source Sans 3", sans-serif';
-  ctx.fillText(member.country === "CD" ? "Congo (RDC)" : "France", tx, 436);
-  ctx.font = 'italic 400 24px "Fraunces", Georgia, serif'; ctx.fillStyle = "rgba(251,247,240,0.75)";
-  ctx.fillText("« Ensemble pour un avenir meilleur »", tx, 520);
+  fitText(ctx, member.first_name, maxW, 50, '"Fraunces", Georgia, serif');
+  ctx.fillText(member.first_name, tx, 236);
+  fitText(ctx, member.last_name.toUpperCase(), maxW, 50, '"Fraunces", Georgia, serif');
+  ctx.fillText(member.last_name.toUpperCase(), tx, 292);
+  ctx.fillStyle = "#E9C46A"; ctx.font = '600 27px "Source Sans 3", sans-serif';
+  ctx.fillText(categoryLabel(member), tx, 344);
+  ctx.fillStyle = "rgba(251,247,240,0.85)"; ctx.font = '400 25px "Source Sans 3", sans-serif';
+  ctx.fillText(member.country === "CD" ? "Congo (RDC)" : "France", tx, 382);
+
+  const { issued, valid } = cardDates(member);
+  const row = (label: string, value: string, y: number) => {
+    ctx.fillStyle = "rgba(251,247,240,0.7)"; ctx.font = '600 20px "Source Sans 3", sans-serif';
+    ctx.fillText(label.toUpperCase(), tx, y);
+    ctx.fillStyle = "#FBF7F0"; ctx.font = '600 28px "Source Sans 3", sans-serif';
+    ctx.fillText(value, tx + 250, y);
+  };
+  ctx.strokeStyle = "rgba(233,196,106,0.5)"; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(tx, 410); ctx.lineTo(tx + 410, 410); ctx.stroke();
+  row("Délivrée le", issued, 450);
+  row("Valable jusqu'au", valid, 492);
+
+  // QR code vers le site de l'association
+  const qs = 150, qx = W - 48 - qs, qy = H - 18 - 30 - qs - 24;
+  const qr = document.createElement("canvas");
+  await QRCode.toCanvas(qr, SITE_URL, { width: qs - 16, margin: 0, color: { dark: "#3a0f4f", light: "#ffffff" } });
+  ctx.fillStyle = "#ffffff"; roundRect(ctx, qx, qy, qs, qs, 12); ctx.fill();
+  ctx.drawImage(qr, qx + 8, qy + 8, qs - 16, qs - 16);
+  ctx.fillStyle = "rgba(251,247,240,0.8)"; ctx.font = '600 16px "Source Sans 3", sans-serif'; ctx.textAlign = "center";
+  ctx.fillText("Site de l'association", qx + qs / 2, qy + qs + 22);
+  ctx.textAlign = "left";
+
+  ctx.font = 'italic 400 20px "Fraunces", Georgia, serif'; ctx.fillStyle = "rgba(251,247,240,0.7)";
+  ctx.fillText("« Ensemble pour un avenir meilleur »", 48, 556);
   ctx.restore();
 
   return await new Promise<Blob>((res, rej) => canvas.toBlob((b) => (b ? res(b) : rej(new Error("Image impossible"))), "image/png"));

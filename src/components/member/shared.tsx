@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FileText, Download, Printer, Camera } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { renderMemberCard, downloadCard, printCard, categoryLabel } from "@/lib/member-card";
+import { renderMemberCard, downloadCard, printCard, categoryLabel, cardDates } from "@/lib/member-card";
 import { Button } from "@/components/ui/button";
 import { useText } from "@/lib/labels";
 import { openPrivateFile, compressImage, type Member } from "@/lib/auth";
@@ -38,7 +38,7 @@ export function MemberCard({ member }: { member: Member }) {
           <Logo size={52} />
           <div>
             <p className="font-display text-lg font-semibold">M.M Monique Mokelina</p>
-            <p className="text-xs text-gold">{x("Carte de membre", "Membership card", "Carte ya lisangani")} {new Date().getFullYear()}</p>
+            <p className="text-xs text-gold">{x("Carte de membre", "Membership card", "Carte ya lisangani")} {cardDates(member).year}</p>
           </div>
           <Flag country={member.country} className="ml-auto h-5 w-7 rounded-sm" />
         </div>
@@ -54,6 +54,7 @@ export function MemberCard({ member }: { member: Member }) {
             <p className="font-display text-2xl leading-tight">{member.first_name} <span className="uppercase">{member.last_name}</span></p>
             <p className="mt-1 text-sm text-gold">{categoryLabel(member)}</p>
             <p className="text-sm text-primary-foreground/80">{member.country === "CD" ? "Congo (RDC)" : "France"}</p>
+            <p className="mt-2 text-xs text-primary-foreground/80">{x("Délivrée le", "Issued", "Epesami")} <strong>{cardDates(member).issued}</strong> · {x("valable jusqu'au", "valid until", "ekosila")} <strong>{cardDates(member).valid}</strong></p>
           </div>
         </div>
         <div className="kente-band absolute inset-x-0 bottom-0" />
