@@ -1,0 +1,16 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Clés publiques (faites pour être dans le navigateur ; la sécurité repose sur les règles RLS de la base)
+[context.production.environment]
+  VITE_SUPABASE_URL = "https://ikuixkttbmdhwbmzerwf.supabase.co"
+  VITE_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_K3hNQhWbfX7NvI8p5Wm_ow_B21_kpyn"
