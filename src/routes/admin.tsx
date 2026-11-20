@@ -149,14 +149,12 @@ function PendingMembers() {
 function MembersTab() {
   const members = useTable<Member>("members", "member_number");
   const [q, setQ] = useState("");
-  const [sort, setSort] = useState<"number" | "name">("name");
   const [open, setOpen] = useState<Member | null>(null);
   const [adding, setAdding] = useState(false);
   if (open) return <MemberSheet member={open} back={() => { setOpen(null); members.refetch(); }} />;
   const filtered = (members.data ?? [])
     .filter((m) => `${m.first_name} ${m.last_name} ${m.email ?? ""}`.toLowerCase().includes(q.toLowerCase()))
-    .sort((a, b) => sort === "number" ? a.member_number - b.member_number
-      : a.last_name.localeCompare(b.last_name, "fr") || a.first_name.localeCompare(b.first_name, "fr"));
+    .sort((a, b) => a.last_name.localeCompare(b.last_name, "fr") || a.first_name.localeCompare(b.first_name, "fr"));
   const statusLabel: Record<string, string> = { pending: "En attente", validated: "Validé", refused: "Refusé", founder: "Fondateur · à compléter" };
   const groups: { country: "FR" | "CD"; title: string }[] = [{ country: "FR", title: "France" }, { country: "CD", title: "Congo (RDC)" }];
   return (
@@ -164,9 +162,6 @@ function MembersTab() {
       <H>Membres</H>
       <div className="mb-6 flex flex-wrap gap-3">
         <input placeholder="Rechercher un nom ou un email" value={q} onChange={(e) => setQ(e.target.value)} className={`${inputClass} max-w-xs`} />
-        <select value={sort} onChange={(e) => setSort(e.target.value as "number" | "name")} className={`${inputClass} max-w-[240px]`} aria-label="Trier">
-          <option value="name">Ordre alphabétique (A → Z)</option><option value="number">Ordre des numéros de membre</option>
-        </select>
         <Button variant="outline" onClick={() => setAdding((v) => !v)}>Ajouter une fiche</Button>
       </div>
       {adding && <AddMember onDone={() => { setAdding(false); members.refetch(); }} />}
@@ -181,18 +176,16 @@ function MembersTab() {
               </h3>
               <div className="overflow-x-auto rounded-xl border">
                 <table className="w-full text-sm">
-                  <thead className="bg-muted text-left"><tr><th className="w-12 p-3">#</th><th className="p-3">Nom</th><th className="p-3">N° de membre</th><th className="p-3">Statut</th><th className="p-3">Compte</th></tr></thead>
+                  <thead className="bg-muted text-left"><tr><th className="p-3">Nom (ordre alphabétique)</th><th className="p-3">Statut</th><th className="p-3">Compte</th></tr></thead>
                   <tbody>
-                    {list.map((m, i) => (
+                    {list.map((m) => (
                       <tr key={m.id} className="cursor-pointer border-t hover:bg-accent" onClick={() => setOpen(m)}>
-                        <td className="p-3 font-semibold">{i + 1}</td>
                         <td className="p-3 font-semibold text-primary underline">{m.last_name} {m.first_name}</td>
-                        <td className="p-3 text-muted-foreground">{String(m.member_number).padStart(4, "0")}</td>
                         <td className="p-3">{statusLabel[m.status] ?? m.status}</td>
                         <td className="p-3">{m.user_id ? "Oui" : "Non"}</td>
                       </tr>
                     ))}
-                    {!list.length && <tr><td colSpan={5} className="p-3 text-muted-foreground">Aucun membre.</td></tr>}
+                    {!list.length && <tr><td colSpan={3} className="p-3 text-muted-foreground">Aucun membre.</td></tr>}
                   </tbody>
                 </table>
               </div>
@@ -242,10 +235,9 @@ function MemberSheet({ member: initial, back }: { member: Member; back: () => vo
       first_name: String(f.get("first_name")).trim(), last_name: String(f.get("last_name")).trim(),
       email: String(f.get("email")).trim().toLowerCase() || null, phone: String(f.get("phone")).trim(), city: String(f.get("city")).trim(),
       country: String(f.get("country")), category: String(f.get("category")), status: String(f.get("status")),
-      member_number: Number(f.get("member_number")) || member.member_number,
     };
     const { data, error } = await supabase.from("members").update(patch).eq("id", member.id).select().single();
-    if (error) { setErr(error.code === "23505" ? "Ce numéro (ou cet email) est déjà utilisé par un autre membre. Libérez-le d'abord." : "Enregistrement impossible."); return; }
+    if (error) { setErr(error.code === "23505" ? "Cet email est déjà utilisé par un autre membre." : "Enregistrement impossible."); return; }
     setErr("");
     if (data) { setMember(data as Member); setSaved(true); setTimeout(() => setSaved(false), 2500); }
   };
@@ -276,7 +268,6 @@ function MemberSheet({ member: initial, back }: { member: Member; back: () => vo
         <div className="space-y-6">
           <MemberCard member={member} />
           <form onSubmit={save} className="grid gap-3 rounded-xl border p-4 sm:grid-cols-2">
-            <Field label="Numéro de membre"><input name="member_number" type="number" min={1} defaultValue={member.member_number} className={inputClass} /></Field>
             <Field label="Prénom"><input name="first_name" defaultValue={member.first_name} className={inputClass} /></Field>
             <Field label="Nom"><input name="last_name" defaultValue={member.last_name} className={inputClass} /></Field>
             <Field label="Email"><input name="email" type="email" defaultValue={member.email ?? ""} className={inputClass} /></Field>

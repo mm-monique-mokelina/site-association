@@ -20,7 +20,7 @@ export function MemberCard({ member }: { member: Member }) {
         <Flag country={member.country} className="ml-auto h-5 w-7 rounded-sm" />
       </div>
       <p className="mt-6 font-display text-2xl">{member.first_name} {member.last_name}</p>
-      <p className="mt-1 text-sm text-primary-foreground/80">N° {String(member.member_number).padStart(4, "0")} · {member.category === "effectif" ? "Membre effectif" : member.founder ? "Membre fondateur" : "Membre sympathisant"}</p>
+      <p className="mt-1 text-sm text-primary-foreground/80">{member.category === "effectif" ? "Membre effectif" : member.founder ? "Membre fondateur" : "Membre sympathisant"}</p>
       <div className="kente-band absolute inset-x-0 bottom-0" />
     </div>
   );
