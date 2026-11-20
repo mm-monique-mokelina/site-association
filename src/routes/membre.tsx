@@ -8,7 +8,7 @@ import { seo } from "@/lib/seo";
 import { useText } from "@/lib/labels";
 import { useMe, safeFileName, type Member } from "@/lib/auth";
 import { PageHero } from "@/components/site/RichText";
-import { MemberCard, PaymentsList, FileList, type MemberFile, type Payment } from "@/components/member/shared";
+import { MemberCard, PaymentsList, FileList, PhotoUpload, type MemberFile, type Payment } from "@/components/member/shared";
 import { Field, inputClass } from "@/components/forms/Fields";
 import { BankInfo, MobileInfo, PaypalButton } from "@/components/site/PaymentInfo";
 import { PaymentDeclare } from "@/components/site/PaymentDeclare";
@@ -82,6 +82,11 @@ function Dossier({ member, onChange }: { member: Member; onChange: () => void })
         <section>
           <h2 className="mb-3 flex items-center gap-2 text-xl font-semibold text-primary"><IdCard className="size-5" />{x("Ma carte de membre", "My membership card", "Carte na ngai")}</h2>
           <MemberCard member={member} />
+          <div className="mt-3">
+            {member.documents_consent_at
+              ? <PhotoUpload member={member} onDone={() => onChange()} />
+              : <p className="text-sm text-muted-foreground">{x("Pour ajouter votre photo, acceptez d'abord la conservation de vos documents (encadré « Déposer un document »).", "To add your photo, first accept that your documents are kept (“Upload a document” box).", "Mpo na kobakisa foto, ndima liboso ete mikanda na yo ebombama.")}</p>}
+          </div>
         </section>
         <section>
           <h2 className="mb-3 flex items-center gap-2 text-xl font-semibold text-primary"><Wallet className="size-5" />{x("Mes cotisations", "My fees", "Mbongo na ngai")}</h2>

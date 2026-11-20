@@ -3,11 +3,11 @@ import { cn } from "@/lib/utils";
 
 export function Logo({ size = 48, className }: { size?: number; className?: string }) {
   const { s } = useSiteData();
-  const url = s("logo_url");
+  const url = s("logo_url") || "/logo.webp";
   if (url)
     return (
       <img src={url} alt="Logo M.M Monique Mokelina" width={size} height={size}
-        className={cn("rounded-full object-cover", className)} style={{ width: size, height: size }} />
+        className={cn("shrink-0 object-contain", className)} style={{ width: size, height: size }} />
     );
   return (
     <span

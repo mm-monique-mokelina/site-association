@@ -7,7 +7,7 @@ export type Member = {
   id: string; user_id: string | null; member_number: number; email: string | null;
   first_name: string; last_name: string; phone: string; country: "FR" | "CD"; city: string;
   category: string; pole: string; status: "pending" | "validated" | "refused" | "founder";
-  founder: boolean; documents_consent_at: string | null; validated_at: string | null; created_at: string;
+  founder: boolean; photo_path: string | null; documents_consent_at: string | null; validated_at: string | null; created_at: string;
 };
 
 export function useSession() {

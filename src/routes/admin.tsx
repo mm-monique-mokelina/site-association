@@ -9,7 +9,7 @@ import { useMe, safeFileName, type Member } from "@/lib/auth";
 import { DONATIONS, ASSOCIATION_FOLDERS } from "@/lib/labels";
 import { PageHero } from "@/components/site/RichText";
 import { Field, inputClass } from "@/components/forms/Fields";
-import { MemberCard, PaymentsList, FileList, type MemberFile, type Payment } from "@/components/member/shared";
+import { MemberCard, PaymentsList, FileList, PhotoUpload, type MemberFile, type Payment } from "@/components/member/shared";
 import { Flag } from "@/components/site/Flags";
 
 export const Route = createFileRoute("/admin")({
@@ -267,6 +267,7 @@ function MemberSheet({ member: initial, back }: { member: Member; back: () => vo
       <div className="grid gap-8 xl:grid-cols-2">
         <div className="space-y-6">
           <MemberCard member={member} />
+          <PhotoUpload member={member} onDone={(m) => setMember(m)} />
           <form onSubmit={save} className="grid gap-3 rounded-xl border p-4 sm:grid-cols-2">
             <Field label="Prénom"><input name="first_name" defaultValue={member.first_name} className={inputClass} /></Field>
             <Field label="Nom"><input name="last_name" defaultValue={member.last_name} className={inputClass} /></Field>

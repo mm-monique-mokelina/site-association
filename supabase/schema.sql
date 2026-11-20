@@ -36,6 +36,7 @@ create table public.members (
   pole text not null default '',
   status text not null default 'pending' check (status in ('pending','validated','refused','founder')),
   founder boolean not null default false,
+  photo_path text,
   accepted_statutes_at timestamptz,
   rgpd_consent_at timestamptz,
   documents_consent_at timestamptz,
