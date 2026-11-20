@@ -7,7 +7,11 @@ export const SITE_URL = "https://mm-monique-mokelina.netlify.app";
 export function cardDates(m: Member) {
   const d = m.validated_at ? new Date(m.validated_at) : new Date();
   const mm = String(d.getMonth() + 1).padStart(2, "0");
-  return { issued: `${mm}/${d.getFullYear()}`, valid: `12/${d.getFullYear()}`, year: d.getFullYear() };
+  // Statuts : AG ordinaire annuelle le 1er dimanche de décembre, cotisation mensuelle.
+  // La carte suit l'année associative (jusqu'en décembre) ; délivrée en novembre ou décembre,
+  // elle reste valable jusqu'en décembre de l'année suivante.
+  const validYear = d.getMonth() >= 10 ? d.getFullYear() + 1 : d.getFullYear();
+  return { issued: `${mm}/${d.getFullYear()}`, valid: `12/${validYear}`, year: d.getFullYear() };
 }
 
 const W = 1012; // format carte bancaire (85,6 × 54 mm) à ~300 dpi
