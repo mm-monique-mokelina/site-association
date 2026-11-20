@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { FileText, Download, Printer, Camera } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { renderMemberCard, downloadCard, printCard, categoryLabel, cardDates } from "@/lib/member-card";
+import QRCode from "qrcode";
+import { renderMemberCard, downloadCard, printCard, categoryLabel, cardDates, SITE_URL } from "@/lib/member-card";
 import { Button } from "@/components/ui/button";
 import { useText } from "@/lib/labels";
 import { openPrivateFile, compressImage, type Member } from "@/lib/auth";
@@ -25,6 +26,8 @@ export function usePhotoUrl(member: Member) {
 export function MemberCard({ member }: { member: Member }) {
   const x = useText();
   const photo = usePhotoUrl(member);
+  const [qr, setQr] = useState("");
+  useEffect(() => { QRCode.toDataURL(SITE_URL, { width: 160, margin: 1, color: { dark: "#3a0f4f", light: "#ffffff" } }).then(setQr).catch(() => setQr("")); }, []);
   const [busy, setBusy] = useState<"" | "dl" | "print">("");
   const act = async (kind: "dl" | "print") => {
     setBusy(kind);
@@ -50,12 +53,18 @@ export function MemberCard({ member }: { member: Member }) {
               {`${member.first_name.charAt(0)}${member.last_name.charAt(0)}`.toUpperCase()}
             </span>
           )}
-          <div className="min-w-0">
+          <div className="min-w-0 flex-1">
             <p className="font-display text-2xl leading-tight">{member.first_name} <span className="uppercase">{member.last_name}</span></p>
             <p className="mt-1 text-sm text-gold">{categoryLabel(member)}</p>
             <p className="flex items-center gap-2 text-sm text-primary-foreground/80"><Flag country={member.country} className="h-3.5 w-5 rounded-[2px]" />{member.country === "CD" ? "Congo (RDC)" : "France"}</p>
             <p className="mt-2 text-xs text-primary-foreground/80">{x("Délivrée le", "Issued", "Epesami")} <strong>{cardDates(member).issued}</strong> · {x("valable jusqu'au", "valid until", "ekosila")} <strong>{cardDates(member).valid}</strong></p>
           </div>
+          {qr && (
+            <figure className="hidden shrink-0 text-center sm:block">
+              <img src={qr} alt={x("QR code du site de l'association", "QR code of the association website", "QR code ya site")} className="size-20 rounded-md bg-white p-1" />
+              <figcaption className="mt-1 text-[10px] text-primary-foreground/70">{x("Site de l'association", "Association website", "Site ya lisangani")}</figcaption>
+            </figure>
+          )}
         </div>
         <div className="kente-band absolute inset-x-0 bottom-0" />
       </div>
