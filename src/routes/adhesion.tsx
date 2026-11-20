@@ -60,7 +60,7 @@ function Page() {
         <ol className="mb-8 grid grid-cols-3 gap-2 sm:grid-cols-6" aria-label={x("Étapes", "Steps", "Matambe")}>
           {steps.map((label, i) => (
             <li key={label} className={`rounded-lg border px-2 py-2 text-center text-xs font-semibold ${i + 1 === step ? "border-primary bg-primary text-primary-foreground" : i + 1 < step ? "border-gold bg-gold/15 text-primary" : "text-muted-foreground"}`}>
-              {i + 1 < step ? <Check className="mx-auto size-4" /> : i + 1}. {label}
+              {i + 1 < step ? <Check className="mx-auto size-4" /> : `${i + 1}.`} {label}
             </li>
           ))}
         </ol>

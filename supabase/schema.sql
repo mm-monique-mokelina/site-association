@@ -276,7 +276,7 @@ insert into public.site_settings(key, value) values
  ('contact_phone', '07 58 45 22 75'), ('whatsapp_number', '33758452275'), ('contact_email', 'm.mokelina@hotmail.com'),
  ('paypal_url', ''), ('bank_holder', ''), ('bank_iban', ''), ('bank_bic', ''), ('bank_name', ''),
  ('mobile_holder', ''), ('mpesa_number', ''), ('orange_number', ''), ('airtel_number', ''),
- ('fee_fr_join', '30'), ('fee_fr_monthly', ''), ('fee_cd_join', ''), ('fee_cd_monthly', ''), ('fee_cd_currency', 'USD')
+ ('fee_fr_join', ''), ('fee_fr_monthly', ''), ('fee_cd_join', ''), ('fee_cd_monthly', ''), ('fee_cd_currency', 'USD')
 on conflict (key) do nothing;
 
 -- Les fiches des membres fondateurs ont été ajoutées directement dans la base (données personnelles, non publiées ici).
