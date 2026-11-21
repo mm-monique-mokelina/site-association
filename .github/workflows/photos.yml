@@ -1,0 +1,23 @@
+name: Photos video
+on:
+  push:
+    branches: [video-photos]
+    paths: [.github/workflows/photos.yml]
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          mkdir -p video-photos
+          curl -sL -o video-photos/A1.jpg "https://images.unsplash.com/photo-1770843093640-c44ae557928b?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1920"
+          curl -sL -o video-photos/B2.jpg "https://images.unsplash.com/photo-1487546331507-fcf8a5d27ab3?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1920"
+          curl -sL -o video-photos/C1.jpg "https://images.unsplash.com/photo-1509099381441-ea3c0cf98b94?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1920"
+          ls -la video-photos
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add video-photos
+          git commit -m "Photos d'illustration (Unsplash)"
+          git push
