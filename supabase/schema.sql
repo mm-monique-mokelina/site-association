@@ -306,3 +306,4 @@ create table if not exists public.representatives (
 );
 alter table public.representatives enable row level security;
 create policy "reps admin" on public.representatives for all to authenticated using (public.is_admin()) with check (public.is_admin());
+grant select, insert, update, delete on public.representatives to authenticated;
