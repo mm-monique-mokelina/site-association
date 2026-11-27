@@ -79,7 +79,8 @@ function Page() {
               </div>
               <div className="rounded-xl border bg-card p-5">
                 <p><strong>{x("Droit d'adhésion", "Membership fee", "Mbongo ya kokota")} :</strong> {fee(country === "FR" ? "fee_fr_join" : "fee_cd_join")}</p>
-                <p className="mt-1"><strong>{x("Mensualité", "Monthly fee", "Mbongo ya sanza")} :</strong> {fee(country === "FR" ? "fee_fr_monthly" : "fee_cd_monthly")}</p>
+                <p className="mt-1"><strong>{x("Mensualité — membre effectif", "Monthly fee — full member", "Mbongo ya sanza — moto ya lisangani mobimba")} :</strong> {fee(country === "FR" ? "fee_fr_monthly" : "fee_cd_monthly")}</p>
+                <p className="mt-1"><strong>{x("Mensualité — membre sympathisant", "Monthly fee — supporting member", "Mbongo ya sanza — mosungi")} :</strong> {s(country === "FR" ? "fee_fr_sym" : "fee_cd_sym") ? `${x("minimum", "minimum", "na nse")} ${fee(country === "FR" ? "fee_fr_sym" : "fee_cd_sym")}` : fee("fee_none")}</p>
               </div>
               <Button onClick={() => setStep(2)}>{x("Continuer", "Continue", "Kokoba")}</Button>
             </section>

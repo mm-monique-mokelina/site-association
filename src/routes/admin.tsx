@@ -500,9 +500,11 @@ const SETTINGS: { key: string; label: string; help?: string }[] = [
   { key: "whatsapp_number_cd", label: "WhatsApp Congo (RDC) (format international sans +, ex. 243890704411)" },
   { key: "contact_email", label: "Email de contact" },
   { key: "fee_fr_join", label: "France — droit d'adhésion (€)" },
-  { key: "fee_fr_monthly", label: "France — mensualité (€)" },
+  { key: "fee_fr_monthly", label: "France — mensualité membre effectif (€)" },
+  { key: "fee_fr_sym", label: "France — mensualité minimum sympathisant (€)" },
   { key: "fee_cd_join", label: "Congo (RDC) — droit d'adhésion" },
-  { key: "fee_cd_monthly", label: "Congo (RDC) — mensualité" },
+  { key: "fee_cd_monthly", label: "Congo (RDC) — mensualité membre effectif" },
+  { key: "fee_cd_sym", label: "Congo (RDC) — mensualité minimum sympathisant" },
   { key: "fee_cd_currency", label: "Congo (RDC) — devise (USD ou CDF)" },
 ];
 function SettingsTab() {
