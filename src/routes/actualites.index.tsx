@@ -4,7 +4,7 @@ import { PageHero, RichText } from "@/components/site/RichText";
 import { useSiteData } from "@/lib/content";
 
 export const Route = createFileRoute("/actualites/")({
-  head: () => seo("Actualités", "Actualités — Association M.M Monique Mokelina."),
+  head: () => seo("Actualités", "Actualités — Fondation Monique Mokelina."),
   component: Page,
 });
 

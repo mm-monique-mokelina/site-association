@@ -102,7 +102,7 @@ export async function renderMemberCard(member: Member, photoUrl: string | null):
   const [logo, photo] = await Promise.all([loadBitmap("/logo.webp"), photoUrl ? loadBitmap(photoUrl) : Promise.resolve(null)]);
   if (logo) { const lh = 120, lw = (logo.width / logo.height) * lh; ctx.drawImage(logo, 40, 30, lw, lh); }
   ctx.fillStyle = "#FBF7F0"; ctx.font = '600 40px "Fraunces", Georgia, serif';
-  ctx.fillText("M.M Monique Mokelina", 180, 82);
+  ctx.fillText("Fondation Monique Mokelina", 180, 82);
   ctx.fillStyle = "#E9C46A"; ctx.font = '600 22px "Source Sans 3", sans-serif';
   ctx.fillText("CARTE DE MEMBRE", 182, 120);
   drawFlag(ctx, "FR", W - 40 - 84 - 14 - 84, 50, 84, 56);
@@ -147,14 +147,14 @@ export async function renderMemberCard(member: Member, photoUrl: string | null):
   row("Délivrée le", issued, 450);
   row("Valable jusqu'au", valid, 492);
 
-  // QR code vers le site de l'association
+  // QR code vers le site de la Fondation
   const qs = 150, qx = W - 48 - qs, qy = H - 18 - 30 - qs - 24;
   const qr = document.createElement("canvas");
   await QRCode.toCanvas(qr, SITE_URL, { width: qs - 16, margin: 0, color: { dark: "#3a0f4f", light: "#ffffff" } });
   ctx.fillStyle = "#ffffff"; roundRect(ctx, qx, qy, qs, qs, 12); ctx.fill();
   ctx.drawImage(qr, qx + 8, qy + 8, qs - 16, qs - 16);
   ctx.fillStyle = "rgba(251,247,240,0.8)"; ctx.font = '600 16px "Source Sans 3", sans-serif'; ctx.textAlign = "center";
-  ctx.fillText("Site de l'association", qx + qs / 2, qy + qs + 22);
+  ctx.fillText("Site de la Fondation", qx + qs / 2, qy + qs + 22);
   ctx.textAlign = "left";
 
   ctx.font = 'italic 400 20px "Fraunces", Georgia, serif'; ctx.fillStyle = "rgba(251,247,240,0.7)";

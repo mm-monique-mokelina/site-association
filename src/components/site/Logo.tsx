@@ -6,16 +6,16 @@ export function Logo({ size = 48, className }: { size?: number; className?: stri
   const url = s("logo_url") || "/logo.webp";
   if (url)
     return (
-      <img src={url} alt="Logo M.M Monique Mokelina" width={size} height={size}
+      <img src={url} alt="Logo Fondation Monique Mokelina" width={size} height={size}
         className={cn("shrink-0 object-contain", className)} style={{ width: size, height: size }} />
     );
   return (
     <span
-      aria-label="Logo M.M Monique Mokelina"
+      aria-label="Logo Fondation Monique Mokelina"
       className={cn("inline-flex shrink-0 items-center justify-center rounded-full bg-primary font-display font-bold text-gold ring-2 ring-gold", className)}
       style={{ width: size, height: size, fontSize: size * 0.32, boxShadow: "inset 0 0 0 3px var(--primary), inset 0 0 0 5px var(--gold)" }}
     >
-      M.M
+      FMM
     </span>
   );
 }

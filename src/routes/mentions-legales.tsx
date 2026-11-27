@@ -4,7 +4,7 @@ import { PageHero, RichText } from "@/components/site/RichText";
 import { useSiteData } from "@/lib/content";
 
 export const Route = createFileRoute("/mentions-legales")({
-  head: () => seo("Mentions légales", "Mentions légales — Association M.M Monique Mokelina."),
+  head: () => seo("Mentions légales", "Mentions légales — Fondation Monique Mokelina."),
   component: Page,
 });
 

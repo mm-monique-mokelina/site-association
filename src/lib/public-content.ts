@@ -6,8 +6,8 @@ export const PUBLIC_CONTENT: Record<string, Record<Lang,string>> = {
     "ln": "Kosangisa France mpe Kongo (RDC) mpo na kosalisa bana, bilenge, bamama ya bilenge mpe basi oyo balonaka ndunda na RDC bámikamba mpo na lobi na bango."
   },
   "home.intro": {
-    "fr": "Association sans but lucratif de droit congolais, notre siège est à Kinshasa. Nos membres en France et au Congo (RDC) unissent leurs forces au service des familles congolaises.",
-    "en": "A non-profit association under Congolese law, based in Kinshasa. Our members in France and Congo (DRC) work together for Congolese families.",
+    "fr": "Fondation de droit congolais, sans but lucratif, notre siège est à Kinshasa. Nos membres en France et au Congo (RDC) unissent leurs forces au service des familles congolaises.",
+    "en": "A non-profit foundation under Congolese law, based in Kinshasa. Our members in France and Congo (DRC) work together for Congolese families.",
     "ln": "Lisangani oyo elukaka litomba te na mibeko ya Kongo (RDC), na biro monene na Kinshasa. Bato na biso na France mpe na Kongo (RDC) basangisaka makasi mpo na mabota ya Kongo (RDC)."
   },
   "home.public1_title": {
@@ -46,9 +46,9 @@ export const PUBLIC_CONTENT: Record<string, Record<Lang,string>> = {
     "ln": "Bikolo mibale, bomoko moko mpo na mabota ya Kongo (RDC)."
   },
   "about.tribute": {
-    "fr": "Le nom de l'association rend hommage aux parents du fondateur : Monique, le prénom de sa mère, qui a toujours œuvré dans le social, et Mokelina, le nom de son père.",
-    "en": "The association’s name honours the founder’s parents: Monique, his mother’s first name, who always worked for social causes, and Mokelina, his father’s name.",
-    "ln": "Nkombo ya lisangani ekumisaka baboti ya mobandisi: Monique, nkombo ya mama na ye oyo asalaki ntango nyonso mpo na kosalisa bato, mpe Mokelina, nkombo ya tata na ye."
+    "fr": "Le nom de la Fondation rend hommage aux parents du fondateur : Monique, le prénom de sa mère, toujours à l’écoute et aux côtés des autres, engagée dans le social, et Mokelina, le nom de son père.",
+    "en": "The Foundation’s name honours the founder’s parents: Monique, his mother’s first name, always listening and by the side of others, committed to social causes, and Mokelina, his father’s name.",
+    "ln": "Nkombo ya lisangani ekumisaka baboti ya mobandisi: Monique, nkombo ya mama na ye oyo ayokaka bato mpe azalaka ntango nyonso pembeni na bango, asalaki mpo na kosalisa bato, mpe Mokelina, nkombo ya tata na ye."
   },
   "about.vision": {
     "fr": "Nous voulons une RDC où chaque enfant peut aller à l'école, où chaque jeune maman peut apprendre un métier et où chaque femme peut nourrir sa famille dignement. Pour y arriver, nous unissons les forces de la diaspora en France et des acteurs de terrain au Congo (RDC).",
@@ -56,8 +56,8 @@ export const PUBLIC_CONTENT: Record<string, Record<Lang,string>> = {
     "ln": "Tolingi RDC oyo mwana nyonso akoki kokende kelasi, mama nyonso ya elenge akoki koyekola mosala mpe mwasi nyonso akoki koleisa libota na ye na lokumu. Mpo na yango, tosangisaka makasi ya diaspora na France mpe ya bato oyo basalaka na Kongo (RDC)."
   },
   "about.founder": {
-    "fr": "Originaire du Congo (RDC) et installé en France, notre fondateur a créé cette association pour relier ses deux pays et mettre l'énergie de la diaspora au service des familles congolaises.",
-    "en": "Originally from Congo (DRC) and living in France, our founder created this association to connect his two countries and put the diaspora’s energy at the service of Congolese families.",
+    "fr": "Originaire du Congo (RDC) et installé en France, notre fondateur a créé cette fondation pour relier ses deux pays et mettre l'énergie de la diaspora au service des familles congolaises.",
+    "en": "Originally from Congo (DRC) and living in France, our founder created this Foundation to connect his two countries and put the diaspora’s energy at the service of Congolese families.",
     "ln": "Mobandisi na biso autá na Kongo (RDC) mpe afandaka na France. Asalaki lisangani oyo mpo na kokangisa bikolo na ye mibale mpe kosalela makasi ya diaspora mpo na mabota ya Kongo (RDC)."
   },
   "about.board": {
@@ -81,19 +81,19 @@ export const PUBLIC_CONTENT: Record<string, Record<Lang,string>> = {
     "ln": "Bato ya mosala basalisaka bana mpe bilenge, bamama ya bilenge mpe basi baloni ndunda."
   },
   "legal.text": {
-    "fr": "Éditeur : Association M.M Monique Mokelina, association sans but lucratif de droit congolais.\nSiège : Kinshasa, RDC.\nContact : m.mokelina@hotmail.com.\nHébergement : Lovable.",
-    "en": "Publisher: M.M Monique Mokelina, a non-profit association under Congolese law.\nHeadquarters: Kinshasa, DRC.\nContact: m.mokelina@hotmail.com.\nHosting: Lovable.",
-    "ln": "Mobimisi: Lisangani M.M Monique Mokelina, lisangani oyo elukaka litomba te na mibeko ya Kongo (RDC).\nBiro monene: Kinshasa, RDC.\nKosolola: m.mokelina@hotmail.com.\nEsika ya site: Lovable."
+    "fr": "Éditeur : Fondation Monique Mokelina (FMM), association sans but lucratif de droit congolais en forme de fondation.\nSiège : Kinshasa, RDC.\nContact : m.mokelina@hotmail.com.\nHébergement : Lovable.",
+    "en": "Publisher: Monique Mokelina Foundation (FMM), a non-profit organisation under Congolese law.\nHeadquarters: Kinshasa, DRC.\nContact: m.mokelina@hotmail.com.\nHosting: Lovable.",
+    "ln": "Mobimisi: Fondation Monique Mokelina (FMM), lisangani oyo elukaka litomba te na mibeko ya Kongo (RDC).\nBiro monene: Kinshasa, RDC.\nKosolola: m.mokelina@hotmail.com.\nEsika ya site: Lovable."
   },
   "privacy.text": {
-    "fr": "Vos données servent à répondre à vos demandes et à gérer votre adhésion. Les dossiers et documents sont confidentiels : seuls le membre concerné et les deux administrateurs peuvent les consulter. Les documents de l'association sont réservés aux administrateurs. Pour exercer vos droits d'accès, de rectification ou d'effacement, écrivez à m.mokelina@hotmail.com.",
-    "en": "Your data is used to answer requests and manage membership. Personal files are confidential and accessible only to the member and the two administrators. Association documents are administrator-only. To request access, correction or deletion, write to m.mokelina@hotmail.com.",
+    "fr": "Vos données servent à répondre à vos demandes et à gérer votre adhésion. Les dossiers et documents sont confidentiels : seuls le membre concerné et les deux administrateurs peuvent les consulter. Les documents de la Fondation sont réservés aux administrateurs. Pour exercer vos droits d'accès, de rectification ou d'effacement, écrivez à m.mokelina@hotmail.com.",
+    "en": "Your data is used to answer requests and manage membership. Personal files are confidential and accessible only to the member and the two administrators. Foundation documents are administrator-only. To request access, correction or deletion, write to m.mokelina@hotmail.com.",
     "ln": "Ba données na bino esalelamaka mpo na koyanola na bosenga mpe kokamba bokoti na lisangani. Mikanda ezali ya kobombama: kaka moto oyo mikanda ezali ya ye mpe bakambi mibale bakoki kotala yango. Mikanda ya lisangani ezali kaka mpo na bakambi. Mpo na kotala, kobongola to kolongola ba données, bokomela m.mokelina@hotmail.com."
   },
   "home.hero_title": {
-    "fr": "Association M.M Monique Mokelina",
-    "en": "M.M Monique Mokelina Association",
-    "ln": "Lisangani M.M Monique Mokelina"
+    "fr": "Fondation Monique Mokelina",
+    "en": "Monique Mokelina Foundation",
+    "ln": "Fondation Monique Mokelina"
   },
   "home.slogan": {
     "fr": "Ensemble pour un avenir meilleur",
@@ -151,8 +151,8 @@ export const PUBLIC_CONTENT: Record<string, Record<Lang,string>> = {
     "ln": "Bopesa ntango, bokabola mayele to bopesa boyokani ya mosala."
   },
   "join.intro": {
-    "fr": "Rejoignez notre association en France ou au Congo (RDC).",
-    "en": "Join our association in France or Congo (DRC).",
+    "fr": "Rejoignez notre fondation en France ou au Congo (RDC).",
+    "en": "Join our Foundation in France or Congo (DRC).",
     "ln": "Bokota na lisangani na biso na France to na Kongo (RDC)."
   },
   "contact.intro": {

@@ -14,10 +14,10 @@ import hero from "@/assets/hero-solidarite.webp";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "M.M Monique Mokelina — Ensemble pour un avenir meilleur" },
-      { name: "description", content: "Association congolaise au service des jeunes, des enfants et des femmes en RDC, avec des membres en France et au Congo (RDC)." },
-      { property: "og:title", content: "M.M Monique Mokelina — Ensemble pour un avenir meilleur" },
-      { property: "og:description", content: "Association au service des jeunes, des enfants et des femmes en RDC." },
+      { title: "Fondation Monique Mokelina — Ensemble pour un avenir meilleur" },
+      { name: "description", content: "Fondation congolaise au service des jeunes, des enfants et des femmes en RDC, avec des membres en France et au Congo (RDC)." },
+      { property: "og:title", content: "Fondation Monique Mokelina — Ensemble pour un avenir meilleur" },
+      { property: "og:description", content: "Fondation au service des jeunes, des enfants et des femmes en RDC." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -55,7 +55,7 @@ function Home() {
           </div>
           <div className="relative mx-auto w-full max-w-sm md:max-w-md">
             <div className="absolute -inset-3 rounded-full bg-gold-gradient opacity-80" aria-hidden />
-            <img src={heroImg} alt="Une femme et trois enfants, symbole de l'association" width={720} height={720}
+            <img src={heroImg} alt="Une femme et trois enfants, symbole de la Fondation" width={720} height={720}
               fetchPriority="high" className="relative aspect-square w-full rounded-full object-cover ring-4 ring-primary-deep" />
           </div>
         </div>

@@ -29,7 +29,7 @@ export function PaymentDeclare({ memberId, defaultKind = "adhesion", country = "
     if (!error) onDone?.();
   };
   if (state === "ok")
-    return <p role="status" className="rounded-md border border-success bg-success/10 p-4">{x("Merci ! Votre paiement est déclaré. Il sera confirmé par l'association.", "Thank you! Your payment has been declared and will be confirmed by the association.", "Matondi! Lifuti na bino eyebisami. Lisangani ekondima yango.")}</p>;
+    return <p role="status" className="rounded-md border border-success bg-success/10 p-4">{x("Merci ! Votre paiement est déclaré. Il sera confirmé par la Fondation.", "Thank you! Your payment has been declared and will be confirmed by the Foundation.", "Matondi! Lifuti na bino eyebisami. Lisangani ekondima yango.")}</p>;
   return (
     <form onSubmit={submit} className="grid gap-4 sm:grid-cols-2">
       <Field label={x("Type", "Type", "Lolenge")}>

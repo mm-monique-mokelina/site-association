@@ -47,7 +47,7 @@ export function SiteHeader() {
         <Link to="/" className="flex items-center gap-2">
           <Logo size={42} />
           <span className="leading-tight">
-            <span className="block font-display text-base font-semibold text-primary">M.M Monique Mokelina</span>
+            <span className="block font-display text-base font-semibold text-primary">Fondation Monique Mokelina</span>
             <span className="hidden text-xs text-muted-foreground sm:block">Ensemble pour un avenir meilleur</span>
           </span>
         </Link>

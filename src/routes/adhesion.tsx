@@ -13,7 +13,7 @@ import { PaymentDeclare } from "@/components/site/PaymentDeclare";
 import { Flag } from "@/components/site/Flags";
 
 export const Route = createFileRoute("/adhesion")({
-  head: () => seo("Adhérer", "Devenez membre de l'Association M.M Monique Mokelina, en France ou au Congo (RDC)."),
+  head: () => seo("Adhérer", "Devenez membre de la Fondation Monique Mokelina, en France ou au Congo (RDC)."),
   component: Page,
 });
 
@@ -55,7 +55,7 @@ function Page() {
 
   return (
     <>
-      <PageHero title={x("Adhérer à l'association", "Join the association", "Kokota na lisangani")} intro={x("Rejoignez-nous en France ou au Congo (RDC), en quelques étapes.", "Join us in France or Congo (RDC) in a few steps.", "Bokota elongo na biso na France to na Kongo (RDC), na mwa matambe.")} />
+      <PageHero title={x("Adhérer à la Fondation", "Join the Foundation", "Kokota na lisangani")} intro={x("Rejoignez-nous en France ou au Congo (RDC), en quelques étapes.", "Join us in France or Congo (RDC) in a few steps.", "Bokota elongo na biso na France to na Kongo (RDC), na mwa matambe.")} />
       <div className="container-page py-10">
         <ol className="mb-8 grid grid-cols-3 gap-2 sm:grid-cols-6" aria-label={x("Étapes", "Steps", "Matambe")}>
           {steps.map((label, i) => (
@@ -120,8 +120,8 @@ function Page() {
 
           {step === 3 && (
             <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); setStep(4); }}>
-              <label className="flex items-start gap-3"><input type="checkbox" required className="mt-1 size-4 accent-primary" /><span>{x("J'accepte les statuts et le règlement intérieur de l'association.", "I accept the association's statutes and internal rules.", "Nandimi mibeko mpe malako ya lisangani.")}</span></label>
-              <label className="flex items-start gap-3"><input type="checkbox" required className="mt-1 size-4 accent-primary" /><span>{x("J'accepte que l'association utilise mes données pour gérer mon adhésion (voir ", "I agree that the association uses my data to manage my membership (see ", "Nandimi ete lisangani esalela ba données na ngai mpo na bokoti na ngai (tala ")}<Link to="/confidentialite" className="text-primary underline">{x("Protection des données", "Data protection", "Kobatela ba données")}</Link>).</span></label>
+              <label className="flex items-start gap-3"><input type="checkbox" required className="mt-1 size-4 accent-primary" /><span>{x("J'accepte les statuts et le règlement intérieur de la Fondation.", "I accept the Foundation's statutes and internal rules.", "Nandimi mibeko mpe malako ya lisangani.")}</span></label>
+              <label className="flex items-start gap-3"><input type="checkbox" required className="mt-1 size-4 accent-primary" /><span>{x("J'accepte que la Fondation utilise mes données pour gérer mon adhésion (voir ", "I agree that the Foundation uses my data to manage my membership (see ", "Nandimi ete lisangani esalela ba données na ngai mpo na bokoti na ngai (tala ")}<Link to="/confidentialite" className="text-primary underline">{x("Protection des données", "Data protection", "Kobatela ba données")}</Link>).</span></label>
               <div className="flex gap-3">
                 <Button type="button" variant="outline" onClick={() => setStep(2)}>{x("Retour", "Back", "Kozonga")}</Button>
                 <Button type="submit">{x("Continuer", "Continue", "Kokoba")}</Button>

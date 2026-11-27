@@ -13,7 +13,7 @@ export function SiteFooter() {
       <div className="container-page grid gap-8 py-10 md:grid-cols-4">
         <div className="md:col-span-1">
           <Logo size={64} />
-          <p className="mt-3 font-display text-lg">M.M Monique Mokelina</p>
+          <p className="mt-3 font-display text-lg">Fondation Monique Mokelina</p>
           <p className="text-sm text-gold">Ensemble pour un avenir meilleur</p>
           <p className="mt-2 text-xs text-primary-foreground/70">{t("footer.rights")}</p>
         </div>
@@ -29,7 +29,7 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-primary-foreground/15">
         <div className="container-page flex flex-wrap gap-4 py-4 text-xs text-primary-foreground/70">
-          <span>© {new Date().getFullYear()} M.M Monique Mokelina</span>
+          <span>© {new Date().getFullYear()} Fondation Monique Mokelina</span>
           <Link to="/mentions-legales" className="hover:text-gold">{t("footer.legal")}</Link>
           <Link to="/confidentialite" className="hover:text-gold">{t("footer.privacy")}</Link>
           <Link to="/connexion" className="hover:text-gold">{t("nav.login")}</Link>

@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { LayoutDashboard, UserCheck, Users, Wallet, Mail, HandHeart, FolderLock, Settings, ArrowLeft, Upload } from "lucide-react";
+import { LayoutDashboard, UserCheck, Users, Wallet, Mail, HandHeart, FolderLock, Settings, ArrowLeft, Upload, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { seo } from "@/lib/seo";
@@ -13,19 +13,20 @@ import { MemberCard, PaymentsList, FileList, PhotoUpload, type MemberFile, type 
 import { Flag } from "@/components/site/Flags";
 
 export const Route = createFileRoute("/admin")({
-  head: () => seo("Administration", "Administration — Association M.M Monique Mokelina."),
+  head: () => seo("Administration", "Administration — Fondation Monique Mokelina."),
   component: Page,
 });
 
-type Tab = "dash" | "pending" | "members" | "payments" | "messages" | "volunteers" | "docs" | "settings";
+type Tab = "dash" | "pending" | "members" | "reps" | "payments" | "messages" | "volunteers" | "docs" | "settings";
 const TABS: { id: Tab; label: string; icon: typeof Users }[] = [
   { id: "dash", label: "Tableau de bord", icon: LayoutDashboard },
   { id: "pending", label: "Adhésions à valider", icon: UserCheck },
   { id: "members", label: "Membres", icon: Users },
+  { id: "reps", label: "Représentants Kinshasa", icon: MapPin },
   { id: "payments", label: "Cotisations et paiements", icon: Wallet },
   { id: "messages", label: "Messages", icon: Mail },
   { id: "volunteers", label: "Bénévoles et partenaires", icon: HandHeart },
-  { id: "docs", label: "Documents de l'association", icon: FolderLock },
+  { id: "docs", label: "Documents de la Fondation", icon: FolderLock },
   { id: "settings", label: "Réglages du site", icon: Settings },
 ];
 
@@ -52,7 +53,7 @@ function Page() {
       <>
         <PageHero title="Administration" />
         <div className="container-page space-y-4 py-10">
-          <p>Cet espace est réservé à l'administration de l'association.</p>
+          <p>Cet espace est réservé à l'administration de la Fondation.</p>
           <Button asChild><Link to="/connexion">Connexion</Link></Button>
         </div>
       </>
@@ -72,6 +73,7 @@ function Page() {
           {tab === "dash" && <Dashboard go={setTab} />}
           {tab === "pending" && <PendingMembers />}
           {tab === "members" && <MembersTab />}
+          {tab === "reps" && <RepsTab />}
           {tab === "payments" && <PaymentsTab />}
           {tab === "messages" && <MessagesTab />}
           {tab === "volunteers" && <VolunteersTab />}
@@ -362,6 +364,55 @@ function MessagesTab() {
 }
 
 type Vol = { id: string; kind: string; name: string; email: string; phone: string; country: string; city: string; activities: string[]; availability: string; structure_type: string; proposal: string; message: string; handled: boolean; created_at: string };
+type Rep = { id: string; full_name: string; phone: string | null; role: string | null; city: string; notes: string | null; created_at: string };
+function RepsTab() {
+  const qc = useQueryClient();
+  const reps = useQuery({
+    queryKey: ["admin", "representatives"],
+    queryFn: async () => {
+      const { data, error } = await supabase.from("representatives").select("*").order("full_name");
+      if (error) throw error;
+      return (data ?? []) as Rep[];
+    },
+  });
+  const refresh = () => qc.invalidateQueries({ queryKey: ["admin", "representatives"] });
+  const update = async (id: string, patch: Partial<Rep>) => { await supabase.from("representatives").update(patch).eq("id", id); refresh(); };
+  const add = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget; const f = new FormData(form);
+    const full_name = String(f.get("full_name") ?? "").trim();
+    if (!full_name) return;
+    await supabase.from("representatives").insert({ full_name, phone: String(f.get("phone") ?? "").trim() || null, role: String(f.get("role") ?? "").trim() || null, city: String(f.get("city") ?? "Kinshasa").trim() || "Kinshasa" });
+    form.reset(); refresh();
+  };
+  const remove = async (r: Rep) => { if (window.confirm(`Supprimer la fiche de ${r.full_name} ?`)) { await supabase.from("representatives").delete().eq("id", r.id); refresh(); } };
+  const wa = (p: string) => p.replace(/\D/g, "").replace(/^00/, "");
+  return (
+    <>
+      <H>Représentants Kinshasa</H>
+      <p className="mb-4 rounded-md bg-gold/10 p-3 text-sm">Fiches internes : ces numéros ne sont jamais affichés sur le site public. Le numéro public du Congo (RDC) se règle dans « Réglages du site ».</p>
+      <ul className="space-y-2">
+        {(reps.data ?? []).map((r) => (
+          <li key={r.id} className="grid gap-2 rounded-xl border bg-card p-3 text-sm sm:grid-cols-[1.4fr_1fr_1.2fr_auto] sm:items-center">
+            <strong>{r.full_name}</strong>
+            <span>{r.phone ? <><a className="text-primary underline" href={`tel:+${wa(r.phone)}`}>{r.phone}</a> · <a className="text-primary underline" href={`https://wa.me/${wa(r.phone)}`} target="_blank" rel="noopener noreferrer">WhatsApp</a></> : <span className="text-muted-foreground">Pas de numéro</span>}</span>
+            <input defaultValue={r.role ?? ""} placeholder="Fonction" className={inputClass} onBlur={(e) => e.target.value !== (r.role ?? "") && update(r.id, { role: e.target.value || null })} />
+            <button onClick={() => remove(r)} className="text-xs text-destructive underline">Supprimer</button>
+          </li>
+        ))}
+        {!reps.data?.length && <p className="text-muted-foreground">Aucun représentant.</p>}
+      </ul>
+      <form onSubmit={add} className="mt-6 grid gap-3 rounded-xl border p-4 sm:grid-cols-4">
+        <Field label="Nom, post-nom, prénom"><input name="full_name" required maxLength={150} className={inputClass} /></Field>
+        <Field label="Téléphone"><input name="phone" maxLength={40} placeholder="+243 …" className={inputClass} /></Field>
+        <Field label="Fonction"><input name="role" maxLength={120} className={inputClass} /></Field>
+        <Field label="Ville"><input name="city" defaultValue="Kinshasa" maxLength={80} className={inputClass} /></Field>
+        <div className="sm:col-span-4"><Button type="submit">Ajouter</Button></div>
+      </form>
+    </>
+  );
+}
+
 function VolunteersTab() {
   const vols = useTable<Vol>("volunteer_requests");
   const kindLabel: Record<string, string> = { benevole: "Bénévole", partenaire: "Partenaire", materiel: "Donateur de matériel" };
@@ -415,7 +466,7 @@ function DocsTab() {
   };
   return (
     <>
-      <H>Documents de l'association</H>
+      <H>Documents de la Fondation</H>
       <div className="mb-4 flex flex-wrap gap-2">
         {ASSOCIATION_FOLDERS.map((f) => (
           <button key={f} onClick={() => setFolder(f)} className={`rounded-full border px-3 py-1.5 text-sm ${folder === f ? "border-primary bg-primary text-primary-foreground" : "hover:bg-accent"}`}>
@@ -443,8 +494,10 @@ const SETTINGS: { key: string; label: string; help?: string }[] = [
   { key: "mpesa_number", label: "M-Pesa" },
   { key: "orange_number", label: "Orange Money" },
   { key: "airtel_number", label: "Airtel Money" },
-  { key: "contact_phone", label: "Téléphone affiché" },
+  { key: "contact_phone", label: "Téléphone affiché — France" },
   { key: "whatsapp_number", label: "Numéro WhatsApp (format international sans +, ex. 33758452275)" },
+  { key: "contact_phone_cd", label: "Téléphone affiché — Congo (RDC)" },
+  { key: "whatsapp_number_cd", label: "WhatsApp Congo (RDC) (format international sans +, ex. 243890704411)" },
   { key: "contact_email", label: "Email de contact" },
   { key: "fee_fr_join", label: "France — droit d'adhésion (€)" },
   { key: "fee_fr_monthly", label: "France — mensualité (€)" },

@@ -7,7 +7,7 @@ import { seo } from "@/lib/seo";
 import { PageHero } from "@/components/site/RichText";
 
 export const Route = createFileRoute("/actions")({
-  head: () => seo("Notre but", "Éducation, protection, autonomie, nourrir les familles, jeunesse : les 5 axes de l'association."),
+  head: () => seo("Notre but", "Éducation, protection, autonomie, nourrir les familles, jeunesse : les 5 axes de la Fondation."),
   component: Actions,
 });
 

@@ -29,12 +29,12 @@ export const CONTENT: ContentSection[] = [
     id: "home",
     title: "Accueil",
     fields: [
-      { key: "home.hero_title", label: "Titre principal", fr: "Association M.M Monique Mokelina", en: "M.M Monique Mokelina Association" },
+      { key: "home.hero_title", label: "Titre principal", fr: "Fondation Monique Mokelina", en: "Monique Mokelina Foundation" },
       { key: "home.slogan", label: "Slogan", fr: "Ensemble pour un avenir meilleur", en: "Together for a better future" },
       { key: "home.mission", label: "Mission en une phrase", fr: `${T} — Notre mission en une phrase.`, en: `${TE} — Our mission in one sentence.`, long: true },
       { key: "home.hero_image", label: "Image d'accueil (facultative)", fr: "", image: true },
       { key: "home.intro_title", label: "Titre présentation", fr: "Qui nous sommes", en: "Who we are" },
-      { key: "home.intro", label: "Texte de présentation", fr: `Association sans but lucratif de droit congolais, dont le siège est à Kinshasa, avec des membres en France et au Congo (RDC). ${T}`, en: `Non-profit association under Congolese law, headquartered in Kinshasa, with members in France and Congo (RDC). ${TE}`, long: true },
+      { key: "home.intro", label: "Texte de présentation", fr: `Fondation de droit congolais, sans but lucratif, dont le siège est à Kinshasa, avec des membres en France et au Congo (RDC). ${T}`, en: `Non-profit foundation under Congolese law, headquartered in Kinshasa, with members in France and Congo (RDC). ${TE}`, long: true },
       { key: "home.public1_title", label: "Public 1 — titre", fr: "Les filles-mères", en: "Young mothers" },
       { key: "home.public1_text", label: "Public 1 — texte", fr: `Formation aux métiers et accompagnement. ${T}`, en: `Vocational training and support. ${TE}`, long: true },
       { key: "home.public2_title", label: "Public 2 — titre", fr: "Les femmes maraîchères", en: "Women market gardeners" },
@@ -51,7 +51,7 @@ export const CONTENT: ContentSection[] = [
     fields: [
       { key: "about.intro", label: "Introduction", fr: T, en: TE, long: true },
       { key: "about.tribute_title", label: "Hommage — titre", fr: "Hommage à Monique Mokelina", en: "Tribute to Monique Mokelina" },
-      { key: "about.tribute", label: "Hommage — texte", fr: `Monique Mokelina, mère du fondateur, a toujours œuvré dans le social. ${T}`, en: `Monique Mokelina, the founder's mother, always worked for social causes. ${TE}`, long: true },
+      { key: "about.tribute", label: "Hommage — texte", fr: `Monique Mokelina, mère du fondateur, toujours à l’écoute et aux côtés des autres, engagée dans le social. ${T}`, en: `Monique Mokelina, the founder's mother, always listening and by the side of others, committed to social causes. ${TE}`, long: true },
       { key: "about.tribute_image", label: "Hommage — photo", fr: "", image: true },
       { key: "about.vision_title", label: "Vision — titre", fr: "Notre vision", en: "Our vision" },
       { key: "about.vision", label: "Vision — texte", fr: T, en: TE, long: true },
@@ -103,7 +103,7 @@ export const CONTENT: ContentSection[] = [
   {
     id: "join",
     title: "Adhésion",
-    fields: [{ key: "join.intro", label: "Introduction", fr: "Devenez membre de l'association et participez à la vie de nos projets, en France comme au Congo (RDC). L'adhésion se règle au mois.", en: "Become a member and take part in our projects, in France and in Congo (RDC). Membership is paid monthly.", long: true }],
+    fields: [{ key: "join.intro", label: "Introduction", fr: "Devenez membre de la Fondation et participez à la vie de nos projets, en France comme au Congo (RDC). L'adhésion se règle au mois.", en: "Become a member and take part in our projects, in France and in Congo (RDC). Membership is paid monthly.", long: true }],
   },
   {
     id: "contact",
@@ -114,7 +114,7 @@ export const CONTENT: ContentSection[] = [
     id: "legal",
     title: "Pages légales",
     fields: [
-      { key: "legal.text", label: "Mentions légales", fr: `Éditeur : Association M.M Monique Mokelina, association sans but lucratif de droit congolais.\nSiège : Kinshasa — adresse ${T}\nResponsable de la publication : ${T}\nHébergement : ${T}`, long: true },
+      { key: "legal.text", label: "Mentions légales", fr: `Éditeur : Fondation Monique Mokelina (FMM), association sans but lucratif de droit congolais en forme de fondation.\nSiège : Kinshasa — adresse ${T}\nResponsable de la publication : ${T}\nHébergement : ${T}`, long: true },
       { key: "privacy.text", label: "Protection des données", fr: `Données collectées : nom, prénom, email, téléphone, pays, ville, informations d'adhésion et de cotisation.\nFinalité : gestion des adhésions, des cotisations et de la vie associative.\nDurée de conservation : ${T}\nVos droits (RGPD, membres résidant en France) : accès, rectification, effacement, opposition et portabilité. Pour les exercer : ${T}\nResponsable du traitement : ${T}`, long: true },
     ],
   },

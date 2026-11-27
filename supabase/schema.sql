@@ -293,3 +293,16 @@ insert into public.site_settings(key, value) values
 on conflict (key) do nothing;
 
 -- Les fiches des membres fondateurs ont été ajoutées directement dans la base (données personnelles, non publiées ici).
+
+-- Représentants (fiches internes, visibles par l'administration seulement)
+create table if not exists public.representatives (
+  id uuid primary key default gen_random_uuid(),
+  full_name text not null,
+  phone text,
+  role text,
+  city text not null default 'Kinshasa',
+  notes text,
+  created_at timestamptz not null default now()
+);
+alter table public.representatives enable row level security;
+create policy "reps admin" on public.representatives for all to authenticated using (public.is_admin()) with check (public.is_admin());

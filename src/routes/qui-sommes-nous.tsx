@@ -5,7 +5,7 @@ import { seo } from "@/lib/seo";
 import { PageHero, RichText, Marked } from "@/components/site/RichText";
 
 export const Route = createFileRoute("/qui-sommes-nous")({
-  head: () => seo("Qui sommes-nous", "L'hommage à Monique Mokelina, notre vision, le fondateur et le bureau de l'association."),
+  head: () => seo("Qui sommes-nous", "L'hommage à Monique Mokelina, notre vision, le fondateur et le bureau de la Fondation."),
   component: About,
 });
 

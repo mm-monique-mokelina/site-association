@@ -82,10 +82,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Association M.M Monique Mokelina" },
-      { name: "description", content: "Association M.M Monique Mokelina — Ensemble pour un avenir meilleur. Jeunes, enfants et femmes en RDC." },
+      { title: "Fondation Monique Mokelina" },
+      { name: "description", content: "Fondation Monique Mokelina — Ensemble pour un avenir meilleur. Jeunes, enfants et femmes en RDC." },
       { name: "theme-color", content: "#4B1663" },
-      { property: "og:title", content: "Association M.M Monique Mokelina" },
+      { property: "og:title", content: "Fondation Monique Mokelina" },
       { property: "og:description", content: "Ensemble pour un avenir meilleur." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -14,7 +14,7 @@ import { BankInfo, MobileInfo, PaypalButton } from "@/components/site/PaymentInf
 import { PaymentDeclare } from "@/components/site/PaymentDeclare";
 
 export const Route = createFileRoute("/membre")({
-  head: () => seo("Mon dossier", "Espace membre — Association M.M Monique Mokelina."),
+  head: () => seo("Mon dossier", "Espace membre — Fondation Monique Mokelina."),
   component: Page,
 });
 
@@ -150,7 +150,7 @@ function Uploader({ member, onDone }: { member: Member; onDone: () => void }) {
         <div className="space-y-3">
           <label className="flex items-start gap-3 text-sm">
             <input id="consent" type="checkbox" className="mt-1 size-4 accent-primary" />
-            <span>{x("J'accepte que l'association conserve mes documents de façon confidentielle, consultables uniquement par moi et l'administratrice.", "I agree that the association keeps my documents confidentially, viewable only by me and the administrator.", "Nandimi ete lisangani ebomba mikanda na ngai na kobombama, kaka ngai mpe mokambi bakoki kotala yango.")}</span>
+            <span>{x("J'accepte que la Fondation conserve mes documents de façon confidentielle, consultables uniquement par moi et l'administratrice.", "I agree that the Foundation keeps my documents confidentially, viewable only by me and the administrator.", "Nandimi ete lisangani ebomba mikanda na ngai na kobombama, kaka ngai mpe mokambi bakoki kotala yango.")}</span>
           </label>
           <Button onClick={() => { const c = document.getElementById("consent") as HTMLInputElement | null; if (c?.checked) giveConsent(); }}>{x("Valider", "Confirm", "Kondima")}</Button>
         </div>

@@ -8,7 +8,7 @@ import { PageHero } from "@/components/site/RichText";
 import { Field, inputClass } from "@/components/forms/Fields";
 
 export const Route = createFileRoute("/connexion")({
-  head: () => seo("Connexion", "Connexion à l'espace membre — Association M.M Monique Mokelina."),
+  head: () => seo("Connexion", "Connexion à l'espace membre — Fondation Monique Mokelina."),
   component: Page,
 });
 

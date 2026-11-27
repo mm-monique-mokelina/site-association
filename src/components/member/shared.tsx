@@ -40,7 +40,7 @@ export function MemberCard({ member }: { member: Member }) {
         <div className="flex items-center gap-3">
           <Logo size={52} />
           <div>
-            <p className="font-display text-lg font-semibold">M.M Monique Mokelina</p>
+            <p className="font-display text-lg font-semibold">Fondation Monique Mokelina</p>
             <p className="text-xs text-gold">{x("Carte de membre", "Membership card", "Carte ya lisangani")}</p>
           </div>
           <span className="ml-auto flex gap-1.5"><Flag country="FR" className="h-5 w-7 rounded-sm" /><Flag country="CD" className="h-5 w-7 rounded-sm" /></span>
@@ -61,8 +61,8 @@ export function MemberCard({ member }: { member: Member }) {
           </div>
           {qr && (
             <figure className="hidden shrink-0 text-center sm:block">
-              <img src={qr} alt={x("QR code du site de l'association", "QR code of the association website", "QR code ya site")} className="size-20 rounded-md bg-white p-1" />
-              <figcaption className="mt-1 text-[10px] text-primary-foreground/70">{x("Site de l'association", "Association website", "Site ya lisangani")}</figcaption>
+              <img src={qr} alt={x("QR code du site de la Fondation", "QR code of the Foundation website", "QR code ya site")} className="size-20 rounded-md bg-white p-1" />
+              <figcaption className="mt-1 text-[10px] text-primary-foreground/70">{x("Site de la Fondation", "Foundation website", "Site ya lisangani")}</figcaption>
             </figure>
           )}
         </div>
